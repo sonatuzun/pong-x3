@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{89E97339-2153-0CA1-FDC3-7B04EDFD2A00}</ProjectGuid>
+    <ProjectGuid>{81E03437-64C5-ABE7-B75D-66E311C5A2C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Asteroids.Unity</AssemblyName>
@@ -1196,11 +1196,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Quantum.Unity.csproj">
-      <Project>{405E94CD-FB4D-A2DA-5253-7BD9CC4FD8A6}</Project>
+      <Project>{8F5A3799-892D-D763-82E3-15096A9AB3E0}</Project>
       <Name>Quantum.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Simulation.csproj">
-      <Project>{B50F1F1A-55B3-9A37-AE7A-7732D778AE37}</Project>
+      <Project>{F86D63D6-3879-3C58-E816-9015FB82CF06}</Project>
       <Name>Quantum.Simulation</Name>
     </ProjectReference>
   </ItemGroup>

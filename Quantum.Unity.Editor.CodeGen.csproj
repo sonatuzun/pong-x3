@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Quantum.Editor</RootNamespace>
-    <ProjectGuid>{60D1D8C0-9021-20E8-AD3B-C1CA290BBC9D}</ProjectGuid>
+    <ProjectGuid>{B082F732-B24E-5204-9682-CF534EA7806C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Quantum.Unity.Editor.CodeGen</AssemblyName>

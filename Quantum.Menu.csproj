@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2195A906-9784-D259-CCC9-93A1A791FF0A}</ProjectGuid>
+    <ProjectGuid>{015DF437-2E78-5417-1444-C92FFC5D5BDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Quantum.Menu</AssemblyName>
@@ -1206,15 +1206,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Quantum.Simulation.csproj">
-      <Project>{B50F1F1A-55B3-9A37-AE7A-7732D778AE37}</Project>
+      <Project>{F86D63D6-3879-3C58-E816-9015FB82CF06}</Project>
       <Name>Quantum.Simulation</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Unity.csproj">
-      <Project>{405E94CD-FB4D-A2DA-5253-7BD9CC4FD8A6}</Project>
+      <Project>{8F5A3799-892D-D763-82E3-15096A9AB3E0}</Project>
       <Name>Quantum.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="Photon.Realtime.csproj">
-      <Project>{FFB1B2CD-BC50-2618-9737-24B462C9F097}</Project>
+      <Project>{FE0F1368-C515-0A5C-4072-B62186D3AEA3}</Project>
       <Name>Photon.Realtime</Name>
     </ProjectReference>
   </ItemGroup>

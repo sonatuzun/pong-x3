@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Quantum</RootNamespace>
-    <ProjectGuid>{B50F1F1A-55B3-9A37-AE7A-7732D778AE37}</ProjectGuid>
+    <ProjectGuid>{F86D63D6-3879-3C58-E816-9015FB82CF06}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Quantum.Simulation</AssemblyName>

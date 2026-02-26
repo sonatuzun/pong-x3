@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{54B4C313-279A-E001-C476-EA4B633DAC59}</ProjectGuid>
+    <ProjectGuid>{809AF25B-2569-8396-084D-8AF850457DDD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -1485,31 +1485,31 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Quantum.Menu.csproj">
-      <Project>{2195A906-9784-D259-CCC9-93A1A791FF0A}</Project>
+      <Project>{015DF437-2E78-5417-1444-C92FFC5D5BDC}</Project>
       <Name>Quantum.Menu</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Simulation.csproj">
-      <Project>{B50F1F1A-55B3-9A37-AE7A-7732D778AE37}</Project>
+      <Project>{F86D63D6-3879-3C58-E816-9015FB82CF06}</Project>
       <Name>Quantum.Simulation</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Unity.csproj">
-      <Project>{405E94CD-FB4D-A2DA-5253-7BD9CC4FD8A6}</Project>
+      <Project>{8F5A3799-892D-D763-82E3-15096A9AB3E0}</Project>
       <Name>Quantum.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="Asteroids.Unity.csproj">
-      <Project>{89E97339-2153-0CA1-FDC3-7B04EDFD2A00}</Project>
+      <Project>{81E03437-64C5-ABE7-B75D-66E311C5A2C8}</Project>
       <Name>Asteroids.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="Photon.Realtime.csproj">
-      <Project>{FFB1B2CD-BC50-2618-9737-24B462C9F097}</Project>
+      <Project>{FE0F1368-C515-0A5C-4072-B62186D3AEA3}</Project>
       <Name>Photon.Realtime</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Unity.Editor.csproj">
-      <Project>{F9B0A4BE-8E42-050B-8B1E-C551A76F4C77}</Project>
+      <Project>{FFE039F5-E425-917C-FDDA-27BD4FCF36AF}</Project>
       <Name>Quantum.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Menu.Editor.csproj">
-      <Project>{7090B903-4891-06F5-2858-0F1F5785C485}</Project>
+      <Project>{5B69E441-5EDA-3973-E2A0-F527EE135155}</Project>
       <Name>Quantum.Menu.Editor</Name>
     </ProjectReference>
   </ItemGroup>
