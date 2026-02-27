@@ -1,0 +1,33 @@
+input {
+	button Left;
+	button Right;
+	button Up;
+    button Down;
+	button Fire;
+}
+
+global {
+    Int32 BallCount;
+    Int32 Team1Score;
+    Int32 Team2Score;
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component PlayerLink {
+    PlayerRef PlayerRef;
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component Paddle {
+
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component Ball {
+    FPVector2 Velocity;
+}
+
+signal Team1Scored();
+signal Team2Scored();
+signal BallHitPaddle();
+signal SpawnPaddle(EntityRef paddle);

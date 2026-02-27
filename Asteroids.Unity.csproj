@@ -61,12 +61,12 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.9f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Photon\QuantumAsteroids\View\AsteroidsGameView.cs" />
-    <Compile Include="Assets\Photon\QuantumAsteroids\View\AsteroidsShipView.cs" />
-    <Compile Include="Assets\Photon\QuantumAsteroids\View\AsteroidsQuantumInput.cs" />
+    <Compile Include="Assets\Photon\Pong\View\PongQuantumInput.cs" />
+    <Compile Include="Assets\Photon\Pong\View\PaddleView.cs" />
+    <Compile Include="Assets\Photon\Pong\View\GameView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Photon\QuantumAsteroids\View\Asteroids.Unity.asmdef" />
+    <None Include="Assets\Photon\Pong\View\Pong.Unity.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
