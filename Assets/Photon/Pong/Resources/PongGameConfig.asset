@@ -22,9 +22,9 @@ MonoBehaviour:
     RawValue: 983040
   BallPrototype:
     Id:
-      Value: 0
+      Value: 1328995601699114728
   BallBaseSpeed:
-    RawValue: 983040
+    RawValue: 6554
   GameMapSize:
     X:
       RawValue: 1638400

@@ -2,22 +2,33 @@ using Photon.Deterministic;
 
 namespace Quantum.Pong
 {
-  public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnCollisionEnter2D
-  {
-    public void OnCollisionEnter2D(Frame f, CollisionInfo2D info)
+    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnCollisionEnter2D, ISignalOnTriggerEnter2D
     {
-      if (f.Unsafe.TryGetPointer<Ball>(info.Entity, out var ball))
-      {
-        if (f.Has<Paddle>(info.Other))
+        public void OnCollisionEnter2D(Frame f, CollisionInfo2D info)
         {
-          HandleBallHitPaddle(f, info, ball);
+            if (f.Unsafe.TryGetPointer<Ball>(info.Entity, out var ball))
+            {
+                if (f.Has<Paddle>(info.Other))
+                {
+                    HandleBallHitPaddle(f, ball);
+                }
+            }
         }
-      }
-    }
 
-    private void HandleBallHitPaddle(Frame f, CollisionInfo2D info, Ball* ball)
-    {
-       ball->Velocity.X *= -1;
+        public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
+        {
+            if (f.Unsafe.TryGetPointer<Paddle>(info.Entity, out var paddle))
+            {
+                if (f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
+                {
+                    HandleBallHitPaddle(f, ball);
+                }
+            }
+        }
+
+        private void HandleBallHitPaddle(Frame f, Ball* ball)
+        {
+            ball->Velocity.X *= -1;
+        }
     }
-  }
 }

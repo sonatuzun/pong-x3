@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1562651063633415736
+--- !u!1 &4992824987454997911
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 223334133478747979}
-  - component: {fileID: 7226502060471374761}
-  - component: {fileID: 6007240319242038825}
+  - component: {fileID: 6586755575129577331}
+  - component: {fileID: 3507509138430122181}
+  - component: {fileID: 5710383320574823035}
+  - component: {fileID: 5998439801982321130}
+  - component: {fileID: 3956762633812640850}
+  - component: {fileID: 8502994048052677874}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &223334133478747979
+--- !u!4 &6586755575129577331
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562651063633415736}
+  m_GameObject: {fileID: 4992824987454997911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0067, y: 0.0646, z: 0}
-  m_LocalScale: {x: 1.0135272, y: 9.178804, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 791943743946163433}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7226502060471374761
+--- !u!33 &3507509138430122181
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562651063633415736}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6007240319242038825
+  m_GameObject: {fileID: 4992824987454997911}
+  m_Mesh: {fileID: 5264932889592146542, guid: 498d1eb87a123c1478b396be45490049, type: 2}
+--- !u!23 &5710383320574823035
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562651063633415736}
+  m_GameObject: {fileID: 4992824987454997911}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -90,48 +93,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7030893378180684113
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 791943743946163433}
-  - component: {fileID: 6045643656081910371}
-  - component: {fileID: 6459623938907389998}
-  - component: {fileID: -3520201935617568581}
-  m_Layer: 0
-  m_Name: Paddle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &791943743946163433
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7030893378180684113}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 223334133478747979}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6045643656081910371
+--- !u!114 &5998439801982321130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7030893378180684113}
+  m_GameObject: {fileID: 4992824987454997911}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 836dcb7e0f6259748b850a10912ce727, type: 3}
@@ -146,7 +114,7 @@ MonoBehaviour:
       RawValue: 0
   PhysicsCollider:
     IsEnabled: 1
-    IsTrigger: 1
+    IsTrigger: 0
     Material:
       Id:
         Value: 0
@@ -156,7 +124,7 @@ MonoBehaviour:
       CapsuleDirection2D: 0
       CapsuleDirection3D: 0
     Shape2D:
-      ShapeType: 32
+      ShapeType: 4
       PolygonCollider:
         Id:
           Value: 0
@@ -166,7 +134,7 @@ MonoBehaviour:
         X:
           RawValue: 65536
         Y:
-          RawValue: 655360
+          RawValue: 131072
       EdgeExtent:
         RawValue: 32768
       BoxExtents:
@@ -219,7 +187,7 @@ MonoBehaviour:
     LayerSource: 0
     Layer: 0
     CallbackFlags:
-      Value: 4095
+      Value: 0
   PhysicsBody:
     IsEnabled: 0
     Config2D: 116
@@ -358,13 +326,13 @@ MonoBehaviour:
   View:
     Id:
       Value: 0
---- !u!114 &6459623938907389998
+--- !u!114 &3956762633812640850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7030893378180684113}
+  m_GameObject: {fileID: 4992824987454997911}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0008c51fe3af00b4da5d44f02d9b3dff, type: 3}
@@ -389,17 +357,21 @@ MonoBehaviour:
   OnEntityDestroyed:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-3520201935617568581
+--- !u!114 &8502994048052677874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7030893378180684113}
+  m_GameObject: {fileID: 4992824987454997911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ac6c8ee9084a046a957a1c93c60716, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e2e007490c593c49ba6e3d53d0b707b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypePaddle
+  m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypeBall
   Prototype:
-    _empty_prototype_dummy_field_: 0
+    Velocity:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 0
