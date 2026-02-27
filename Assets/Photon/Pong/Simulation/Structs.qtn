@@ -8,6 +8,7 @@ input {
 
 global {
     Int32 BallCount;
+    Int32 PlayerCount;
     Int32 Team1Score;
     Int32 Team2Score;
 }

@@ -575,8 +575,6 @@ namespace Quantum {
   public unsafe partial struct _globals_ {
     public const Int32 SIZE = 992;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(988)]
-    private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
     [FieldOffset(8)]
@@ -605,8 +603,10 @@ namespace Quantum {
     [FieldOffset(976)]
     public Int32 BallCount;
     [FieldOffset(980)]
-    public Int32 Team1Score;
+    public Int32 PlayerCount;
     [FieldOffset(984)]
+    public Int32 Team1Score;
+    [FieldOffset(988)]
     public Int32 Team2Score;
     public readonly FixedArray<Input> input {
       get {
@@ -629,6 +629,7 @@ namespace Quantum {
         hash = hash * 31 + HashCodeUtils.GetArrayHashCode(input);
         hash = hash * 31 + PlayerLastConnectionState.GetHashCode();
         hash = hash * 31 + BallCount.GetHashCode();
+        hash = hash * 31 + PlayerCount.GetHashCode();
         hash = hash * 31 + Team1Score.GetHashCode();
         hash = hash * 31 + Team2Score.GetHashCode();
         return hash;
@@ -649,6 +650,7 @@ namespace Quantum {
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
         serializer.Stream.Serialize(&p->BallCount);
+        serializer.Stream.Serialize(&p->PlayerCount);
         serializer.Stream.Serialize(&p->Team1Score);
         serializer.Stream.Serialize(&p->Team2Score);
     }
