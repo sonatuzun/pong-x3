@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 791943743946163433}
   - component: {fileID: 6045643656081910371}
   - component: {fileID: 6459623938907389998}
+  - component: {fileID: -3520201935617568581}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -388,3 +389,17 @@ MonoBehaviour:
   OnEntityDestroyed:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3520201935617568581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030893378180684113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ac6c8ee9084a046a957a1c93c60716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypePaddle
+  Prototype:
+    _empty_prototype_dummy_field_: 0
