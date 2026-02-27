@@ -461,6 +461,67 @@ MonoBehaviour:
   _hidePooledObjectsInHierarchy: 1
   _resetGameObjectScale: 0
   _precacheObjects: []
+--- !u!1001 &393146234
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 409157014833620583, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_Name
+      value: AsteroidsShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.0185266
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.85451007
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.740122
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432718715001061974, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446202783166446897, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e49f69d11a60153409b23fb636759bee, type: 3}
 --- !u!1 &417903281
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,13 +700,13 @@ MonoBehaviour:
         Value: 316527076537738773
     DefaultPlayerAvatar:
       Id:
-        Value: 1365103958109072725
+        Value: 1355289131352255996
   UseRandomSeed: 0
   SessionConfig: {fileID: 11400000, guid: aaa425e2ec81aaf46ab07c9ee8b901ea, type: 2}
   LocalPlayers:
   - PlayerAvatar:
       Id:
-        Value: 1365103958109072725
+        Value: 1355289131352255996
     PlayerNickname: Player 1
   MaxPlayerCount: 0
   SimulationSpeedMultiplier: 1
@@ -720,6 +781,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MobileControlsPrefab: {fileID: 2717816386874035507, guid: c5a4fb03479568944ac0ea71f817759b, type: 3}
   MobileControlsCanvas: {fileID: 1522027475}
+--- !u!114 &1330049233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8026707997905104453, guid: e49f69d11a60153409b23fb636759bee, type: 3}
+  m_PrefabInstance: {fileID: 393146234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0008c51fe3af00b4da5d44f02d9b3dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1522027472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1086,8 @@ MonoBehaviour:
   NavMeshSerializeType: 0
   StaticCollider2DReferences: []
   StaticCollider3DReferences: []
-  MapEntityReferences: []
+  MapEntityReferences:
+  - {fileID: 1330049233}
   Asset: {fileID: 0}
 --- !u!4 &1772307970
 Transform:
@@ -1293,3 +1366,4 @@ SceneRoots:
   - {fileID: 884471524}
   - {fileID: 1772307970}
   - {fileID: 1820309690}
+  - {fileID: 393146234}

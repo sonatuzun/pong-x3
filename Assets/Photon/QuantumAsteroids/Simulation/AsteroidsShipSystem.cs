@@ -27,7 +27,7 @@ namespace Quantum.Asteroids
       /// <summary>
       /// Pointer to the entity's physics body component.
       /// </summary>
-      public PhysicsBody2D* Body;
+      //public PhysicsBody2D* Body;
       
       /// <summary>
       /// Pointer to the entity's ship component.
@@ -101,23 +101,16 @@ namespace Quantum.Asteroids
     /// <param name="config">The game configuration settings.</param>
     private void UpdateShipMovement(Frame f, ref Filter filter, Input* input, AsteroidsGameConfig config)
     {
+      //FP turnSpeed = config.ShipTurnSpeed;
       if (input->Up)
       {
-        filter.Body->AddForce(filter.Transform->Up * config.ShipAceleration);
+        filter.Transform->Position += FPVector2.Up;
       }
 
-      FP turnSpeed = config.ShipTurnSpeed;
-      if (input->Left)
+      if (input->Down)
       {
-        filter.Body->AddTorque(turnSpeed);
+        filter.Transform->Position += FPVector2.Down;
       }
-
-      if (input->Right)
-      {
-        filter.Body->AddTorque(-turnSpeed);
-      }
-
-      filter.Body->AngularVelocity = FPMath.Clamp(filter.Body->AngularVelocity, -turnSpeed, turnSpeed);
     }
 
     /// <summary>
@@ -127,17 +120,25 @@ namespace Quantum.Asteroids
     /// <param name="shipEntity">The reference to the ship entity to be spawned.</param>
     public void AsteroidsSpawnShip(Frame f, EntityRef shipEntity)
     {
-      f.Remove<AsteroidsShipRespawn>(shipEntity);
-      
-      AsteroidsGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-      Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(shipEntity);
-      transform->Position = AsteroidsUtils.GetRandomEdgePointOnCircle(f, config.ShipSpawnDistanceToCenter);
-      transform->Teleport(f, transform);
+        {
+            f.Remove<AsteroidsShipRespawn>(shipEntity);
 
-      f.Unsafe.GetPointer<PhysicsBody2D>(shipEntity)->Velocity = default;
-      f.Unsafe.GetPointer<PhysicsBody2D>(shipEntity)->AngularVelocity = default;
-      f.Unsafe.GetPointer<AsteroidsShip>(shipEntity)->AmmoCount = config.MaxAmmo;
-      f.Unsafe.GetPointer<PhysicsCollider2D>(shipEntity)->Enabled = true;
+            AsteroidsGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
+            Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(shipEntity);
+            transform->Position = AsteroidsUtils.GetRandomEdgePointOnCircle(f, config.ShipSpawnDistanceToCenter);
+            transform->Teleport(f, transform);
+
+            //f.Unsafe.GetPointer<PhysicsBody2D>(shipEntity)->Velocity = default;
+            //f.Unsafe.GetPointer<PhysicsBody2D>(shipEntity)->AngularVelocity = default;
+
+            f.Unsafe.GetPointer<AsteroidsShip>(shipEntity)->AmmoCount = config.MaxAmmo;
+            f.Unsafe.GetPointer<PhysicsCollider2D>(shipEntity)->Enabled = true;
+        }
+
+        {
+
+        }
+      
     }
 
     /// <summary>

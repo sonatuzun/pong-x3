@@ -60,6 +60,8 @@ namespace Quantum.Asteroids {
       input.Left = move.x < -0.7f;
       input.Right = move.x > 0.7f;
       input.Up = move.y > 0.7f;
+      input.Down = move.y < -0.7f;
+
 #elif ENABLE_LEGACY_INPUT_MANAGER
       input.Left = UnityEngine.Input.GetKey(KeyCode.A) || UnityEngine.Input.GetKey(KeyCode.LeftArrow);
       input.Right = UnityEngine.Input.GetKey(KeyCode.D) || UnityEngine.Input.GetKey(KeyCode.RightArrow);

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Photon\Quantum\Runtime\QPrototypeTransform2DVertical.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumGraphProfilerGC.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumStaticCircleCollider2D.cs" />
+    <Compile Include="Assets\Photon\QuantumAsteroids\View\Generated\QPrototypePaddle.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumMapLoader.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumGraphProfilerUserScripts.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumGraphProfilerMarkers.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumMapNavMeshUnity.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumGraphSeriesValue.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumNavMeshDebugDrawer.cs" />
+    <Compile Include="Assets\Photon\QuantumAsteroids\View\Generated\QPrototypePlayerLink.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumAddRuntimePlayers.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\PhotonServerSettings.cs" />
     <Compile Include="Assets\Photon\QuantumAsteroids\View\Generated\QPrototypeAsteroidsAsteroid.cs" />
