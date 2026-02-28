@@ -552,7 +552,7 @@ MonoBehaviour:
     LayerSource: 0
     Layer: 0
     CallbackFlags:
-      Value: 0
+      Value: 4095
   PhysicsBody:
     IsEnabled: 0
     Config2D: 116
@@ -822,7 +822,7 @@ MonoBehaviour:
     MutableMode: 0
     PhysicsMaterial:
       Id:
-        Value: 0
+        Value: 454435896808641090
     Asset:
       Id:
         Value: 0
@@ -1107,7 +1107,7 @@ MonoBehaviour:
     MutableMode: 0
     PhysicsMaterial:
       Id:
-        Value: 0
+        Value: 454435896808641090
     Asset:
       Id:
         Value: 0
@@ -1332,7 +1332,7 @@ MonoBehaviour:
     LayerSource: 0
     Layer: 0
     CallbackFlags:
-      Value: 0
+      Value: 4095
   PhysicsBody:
     IsEnabled: 0
     Config2D: 116

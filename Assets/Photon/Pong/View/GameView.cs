@@ -54,7 +54,7 @@ namespace Quantum.Asteroids
     {
       if (LevelText != null)
       {
-        //LevelText.text = $"Level {VerifiedFrame.Global->AsteroidsWaveCount}";
+        LevelText.text = $"{VerifiedFrame.Global->Team1Score} {VerifiedFrame.Global->Team2Score}";
       }
 
       if (ScoreBoard != null)

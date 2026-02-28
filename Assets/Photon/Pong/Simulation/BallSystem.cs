@@ -12,14 +12,14 @@ namespace Quantum.Pong
         {
             public EntityRef Entity;
             public Transform2D* Transform;
+            public PhysicsBody2D* PhysicsBody;
             public Ball* Ball;
         }
 
         public override void Update(Frame f, ref Filter filter)
         {
-            filter.Transform->Position += filter.Ball->Velocity;
-
-            HandleBorderCollisions(f, ref filter);
+            //filter.Transform->Position += filter.Ball->Velocity;
+            //HandleBorderCollisions(f, ref filter);
         }
 
         public void HandleBorderCollisions(Frame f, ref Filter filter)

@@ -43,16 +43,18 @@ namespace Quantum.Pong
         /// <param name="parent">The parent entity near which to spawn the asteroid (or EntityRef.None for random edge spawn).</param>
         public void SpawnBall(Frame f)
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 1; i++)
             {
                 PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
                 EntityRef ballRef = f.Create(config.BallPrototype);
                 Transform2D* ballTransform = f.Unsafe.GetPointer<Transform2D>(ballRef);
+                PhysicsBody2D* body = f.Unsafe.GetPointer<PhysicsBody2D>(ballRef);
                 Ball* ball = f.Unsafe.GetPointer<Ball>(ballRef);
 
 
                 ballTransform->Position = PUtils.GetRandomEdgePointOnCircle(f, 0);
-                ball->Velocity = PUtils.GetRandomEdgePointOnCircle(f, config.BallBaseSpeed);
+                //ball->Velocity = PUtils.GetRandomEdgePointOnCircle(f, config.BallBaseSpeed);
+                body->Velocity = PUtils.GetRandomEdgePointOnCircle(f, config.BallBaseSpeed);
             }
         }
     }

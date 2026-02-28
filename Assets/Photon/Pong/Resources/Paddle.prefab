@@ -221,15 +221,15 @@ MonoBehaviour:
     CallbackFlags:
       Value: 4095
   PhysicsBody:
-    IsEnabled: 0
+    IsEnabled: 1
     Config2D: 116
     Config3D: 58
     RotationFreeze: 0
     InertiaMode: 0
     Mass:
-      RawValue: 65536
+      RawValue: 6553600
     Drag:
-      RawValue: 32768
+      RawValue: 0
     AngularDrag:
       RawValue: 32768
     ExplicitInertia2D:

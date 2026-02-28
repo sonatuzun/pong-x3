@@ -117,7 +117,7 @@ MonoBehaviour:
     IsTrigger: 0
     Material:
       Id:
-        Value: 354206932138541321
+        Value: 454435896808641090
     SourceCollider: {fileID: 0}
     SourceShapeSettings:
       IsScaledBySource: 0
@@ -189,15 +189,15 @@ MonoBehaviour:
     CallbackFlags:
       Value: 0
   PhysicsBody:
-    IsEnabled: 0
-    Config2D: 116
+    IsEnabled: 1
+    Config2D: 118
     Config3D: 58
-    RotationFreeze: 0
+    RotationFreeze: 7
     InertiaMode: 0
     Mass:
-      RawValue: 65536
+      RawValue: 655
     Drag:
-      RawValue: 32768
+      RawValue: 0
     AngularDrag:
       RawValue: 32768
     ExplicitInertia2D:
