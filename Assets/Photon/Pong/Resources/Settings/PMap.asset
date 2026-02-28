@@ -138,6 +138,7 @@ MonoBehaviour:
     - rid: 6415189848121933825
     - rid: 6415189848121933826
     - rid: 6415189848121933827
+    - rid: 6415189848121933828
   SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2
@@ -188,7 +189,7 @@ MonoBehaviour:
         IsTrigger: 1
         PhysicsMaterial:
           Id:
-            Value: 0
+            Value: 354206932138541321
     - rid: 615257187593224194
       type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
@@ -242,16 +243,72 @@ MonoBehaviour:
           IsPersistent: 1
           CompoundShapes: []
         Layer: 0
-        IsTrigger: 1
+        IsTrigger: 0
         PhysicsMaterial:
           Id:
-            Value: 0
+            Value: 354206932138541321
     - rid: 6415189848121933826
+      type: {class: PhysicsBody2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Config:
+          Value: 116
+        Mass:
+          RawValue: 65536
+        Drag:
+          RawValue: 32768
+        AngularDrag:
+          RawValue: 32768
+        CenterOfMass:
+          X:
+            RawValue: 0
+          Y:
+            RawValue: 0
+        GravityScale:
+          _hasValue: 0
+          _value:
+            RawValue: 65536
+        InertiaScale:
+          _hasValue: 0
+          _value:
+            RawValue: 65536
+        InertiaMode: 0
+        ExplicitInertia:
+          RawValue: 65536
+        ParametricInertiaShape:
+          ShapeType: 0
+          PolygonCollider:
+            Id:
+              Value: 0
+          CircleRadius:
+            RawValue: 32768
+          CapsuleSize:
+            X:
+              RawValue: 65536
+            Y:
+              RawValue: 131072
+          EdgeExtent:
+            RawValue: 32768
+          BoxExtents:
+            X:
+              RawValue: 32768
+            Y:
+              RawValue: 32768
+          PositionOffset:
+            X:
+              RawValue: 0
+            Y:
+              RawValue: 0
+          RotationOffset:
+            RawValue: 0
+          UserTag: 0
+          IsPersistent: 1
+          CompoundShapes: []
+    - rid: 6415189848121933827
       type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         CallbackFlags:
           Value: 4095
-    - rid: 6415189848121933827
+    - rid: 6415189848121933828
       type: {class: GoalLinePrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
       data:
         isOnLeft:

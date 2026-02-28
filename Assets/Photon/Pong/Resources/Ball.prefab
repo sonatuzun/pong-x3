@@ -190,7 +190,7 @@ MonoBehaviour:
       Value: 0
   PhysicsBody:
     IsEnabled: 1
-    Config2D: 118
+    Config2D: 246
     Config3D: 58
     RotationFreeze: 7
     InertiaMode: 0

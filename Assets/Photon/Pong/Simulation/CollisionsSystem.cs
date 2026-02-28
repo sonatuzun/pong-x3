@@ -35,7 +35,7 @@ namespace Quantum.Pong
 
         private void HandleBallHitPaddle(Frame f, Ball* ball)
         {
-            ball->Velocity.X *= -1;
+            //ball->Velocity.X *= -1;
         }
     }
 }

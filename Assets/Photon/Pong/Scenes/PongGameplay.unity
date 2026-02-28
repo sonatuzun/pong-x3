@@ -479,10 +479,10 @@ MonoBehaviour:
       RawValue: 0
   PhysicsCollider:
     IsEnabled: 1
-    IsTrigger: 1
+    IsTrigger: 0
     Material:
       Id:
-        Value: 0
+        Value: 354206932138541321
     SourceCollider: {fileID: 0}
     SourceShapeSettings:
       IsScaledBySource: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
     CallbackFlags:
       Value: 4095
   PhysicsBody:
-    IsEnabled: 0
+    IsEnabled: 1
     Config2D: 116
     Config3D: 58
     RotationFreeze: 0
@@ -1262,7 +1262,7 @@ MonoBehaviour:
     IsTrigger: 1
     Material:
       Id:
-        Value: 0
+        Value: 354206932138541321
     SourceCollider: {fileID: 0}
     SourceShapeSettings:
       IsScaledBySource: 0

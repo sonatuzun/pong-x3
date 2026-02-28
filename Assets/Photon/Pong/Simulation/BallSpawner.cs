@@ -53,8 +53,12 @@ namespace Quantum.Pong
 
 
                 ballTransform->Position = PUtils.GetRandomEdgePointOnCircle(f, 0);
-                //ball->Velocity = PUtils.GetRandomEdgePointOnCircle(f, config.BallBaseSpeed);
-                body->Velocity = PUtils.GetRandomEdgePointOnCircle(f, config.BallBaseSpeed);
+
+                FPVector2 direction = (f.RNG->Next() < FP._0_50) ? FPVector2.Left : FPVector2.Right;
+                FP angle = (f.RNG->Next() - FP._0_50) * FP._1;
+                FPVector2 velocity = FPVector2.Rotate(direction * config.BallBaseSpeed, angle);
+
+                body->Velocity = velocity;
             }
         }
     }

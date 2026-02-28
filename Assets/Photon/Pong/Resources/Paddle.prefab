@@ -99,9 +99,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791943743946163433}
-  - component: {fileID: 6045643656081910371}
+  - component: {fileID: 579480501544827283}
   - component: {fileID: 6459623938907389998}
-  - component: {fileID: -3520201935617568581}
+  - component: {fileID: 3767483503829176131}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -125,7 +125,7 @@ Transform:
   - {fileID: 223334133478747979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6045643656081910371
+--- !u!114 &579480501544827283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
       RawValue: 0
   PhysicsCollider:
     IsEnabled: 1
-    IsTrigger: 1
+    IsTrigger: 0
     Material:
       Id:
         Value: 354206932138541321
@@ -156,7 +156,7 @@ MonoBehaviour:
       CapsuleDirection2D: 0
       CapsuleDirection3D: 0
     Shape2D:
-      ShapeType: 32
+      ShapeType: 4
       PolygonCollider:
         Id:
           Value: 0
@@ -166,14 +166,14 @@ MonoBehaviour:
         X:
           RawValue: 65536
         Y:
-          RawValue: 655360
+          RawValue: 131072
       EdgeExtent:
         RawValue: 32768
       BoxExtents:
         X:
           RawValue: 32768
         Y:
-          RawValue: 32768
+          RawValue: 327680
       PositionOffset:
         X:
           RawValue: 0
@@ -227,9 +227,9 @@ MonoBehaviour:
     RotationFreeze: 0
     InertiaMode: 0
     Mass:
-      RawValue: 6553600
+      RawValue: 65536
     Drag:
-      RawValue: 0
+      RawValue: 32768
     AngularDrag:
       RawValue: 32768
     ExplicitInertia2D:
@@ -389,7 +389,7 @@ MonoBehaviour:
   OnEntityDestroyed:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-3520201935617568581
+--- !u!114 &3767483503829176131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
