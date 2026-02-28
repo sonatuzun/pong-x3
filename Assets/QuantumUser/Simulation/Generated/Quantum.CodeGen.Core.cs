@@ -674,6 +674,24 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct GoalLine : Quantum.IComponent {
+    public const Int32 SIZE = 4;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(0)]
+    public QBoolean isOnLeft;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 15641;
+        hash = hash * 31 + isOnLeft.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (GoalLine*)ptr;
+        QBoolean.Serialize(&p->isOnLeft, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Paddle : Quantum.IComponent {
     public const Int32 SIZE = 4;
     public const Int32 ALIGNMENT = 4;
@@ -749,6 +767,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<CharacterController2D>();
       BuildSignalsArrayOnComponentAdded<CharacterController3D>();
       BuildSignalsArrayOnComponentRemoved<CharacterController3D>();
+      BuildSignalsArrayOnComponentAdded<Quantum.GoalLine>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.GoalLine>();
       BuildSignalsArrayOnComponentAdded<MapEntityLink>();
       BuildSignalsArrayOnComponentRemoved<MapEntityLink>();
       BuildSignalsArrayOnComponentAdded<NavMeshAvoidanceAgent>();
@@ -885,6 +905,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(FPVector3), FPVector3.SIZE);
       typeRegistry.Register(typeof(FrameMetaData), FrameMetaData.SIZE);
       typeRegistry.Register(typeof(FrameTimer), FrameTimer.SIZE);
+      typeRegistry.Register(typeof(Quantum.GoalLine), Quantum.GoalLine.SIZE);
       typeRegistry.Register(typeof(HingeJoint), HingeJoint.SIZE);
       typeRegistry.Register(typeof(HingeJoint3D), HingeJoint3D.SIZE);
       typeRegistry.Register(typeof(Hit), Hit.SIZE);
@@ -940,9 +961,10 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 3)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 4)
         .AddBuiltInComponents()
         .Add<Quantum.Ball>(Quantum.Ball.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.GoalLine>(Quantum.GoalLine.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Paddle>(Quantum.Paddle.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerLink>(Quantum.PlayerLink.Serialize, null, null, ComponentFlags.None)
         .Finish();

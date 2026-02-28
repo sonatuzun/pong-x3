@@ -13,6 +13,24 @@ namespace Quantum.Pong
                     HandleBallHitPaddle(f, ball);
                 }
             }
+
+
+            if (f.Unsafe.TryGetPointer<GoalLine>(info.Entity, out var goalLine))
+            {
+                if (f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
+                {
+                    if (goalLine->isOnLeft)
+                    {
+                        f.Global->Team2Score++;
+                    }
+                    else
+                    {
+                        f.Global->Team1Score++;
+                    }
+
+                    f.Destroy(info.Other);
+                }
+            }
         }
 
         private void HandleBallHitPaddle(Frame f, Ball* ball)

@@ -28,6 +28,12 @@ component Ball {
     FPVector2 Velocity;
 }
 
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component GoalLine
+{
+    bool isOnLeft;
+}
+
 signal Team1Scored();
 signal Team2Scored();
 signal BallHitPaddle();
