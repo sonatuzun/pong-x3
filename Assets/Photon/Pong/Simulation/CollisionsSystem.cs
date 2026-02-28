@@ -38,13 +38,14 @@ namespace Quantum.Pong
 
             if (f.Has<Ball>(info.Entity) && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
             {
-                physicsBody->Velocity = FPVector2.Rotate(physicsBody->Velocity * FP._1_10, 
-                    f.RNG->Next(FP.Minus_1, FP._1) * FP._0_50);
-                
-                if (FPMath.Abs(physicsBody->Velocity.X) < config.BallBaseSpeed)
-                {
-                    physicsBody->Velocity.X = config.BallBaseSpeed * FPMath.Sign(physicsBody->Velocity.X);
-                }
+                var vel = physicsBody->Velocity;
+                vel = vel.Normalized * FPMath.Max(config.BallBaseSpeed, vel.Magnitude * FP._1_10);
+                vel = physicsBody->Velocity;
+
+                // vel.X should be greater than vel.Y or the ball can stuck
+                vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y));
+                physicsBody->Velocity = vel;
+
             }
         }
 
