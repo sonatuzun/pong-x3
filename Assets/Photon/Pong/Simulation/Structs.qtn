@@ -25,7 +25,7 @@ component Paddle {
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
 component Ball {
-    FPVector2 Velocity;
+    Int32 BounceCount;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]

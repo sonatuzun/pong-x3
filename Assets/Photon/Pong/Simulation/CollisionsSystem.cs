@@ -1,8 +1,9 @@
 using Photon.Deterministic;
+using UnityEngine.LowLevelPhysics2D;
 
 namespace Quantum.Pong
 {
-    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D, ISignalOnCollision2D
+    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D, ISignalOnCollisionExit2D
     {
         public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
         {
@@ -32,21 +33,29 @@ namespace Quantum.Pong
             }
         }
 
-        public void OnCollision2D(Frame f, CollisionInfo2D info)
+        public void OnCollisionExit2D(Frame f, ExitInfo2D info)
+        {
+            if (f.Unsafe.TryGetPointer<Ball>(info.Entity, out var ball) && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
+            {
+                HandleBallCollision(f, ball, physicsBody);
+            }
+        }
+
+        private void HandleBallCollision(Frame f, Ball* ball, PhysicsBody2D* physicsBody)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
 
-            if (f.Has<Ball>(info.Entity) && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
-            {
-                var vel = physicsBody->Velocity;
-                vel = vel.Normalized * FPMath.Max(config.BallBaseSpeed, vel.Magnitude * FP._1_10);
-                vel = physicsBody->Velocity;
+            var vel = physicsBody->Velocity;
+            int ballSpeedIncrement = 5;
+            var minSpeed = config.BallBaseSpeed + ball->BounceCount * ballSpeedIncrement;
 
-                // vel.X should be greater than vel.Y or the ball can stuck
-                vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y));
-                physicsBody->Velocity = vel;
+            vel = vel.Normalized * FPMath.Max(minSpeed, vel.Magnitude);
 
-            }
+            // vel.X should be greater than vel.Y or the ball can stuck
+            vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y));
+
+            physicsBody->Velocity = vel;
+            ball->BounceCount++;
         }
 
         private void HandleBallHitPaddle(Frame f, Ball* ball)

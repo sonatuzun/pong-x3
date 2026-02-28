@@ -657,20 +657,20 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Ball : Quantum.IComponent {
-    public const Int32 SIZE = 16;
-    public const Int32 ALIGNMENT = 8;
+    public const Int32 SIZE = 4;
+    public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
-    public FPVector2 Velocity;
+    public Int32 BounceCount;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 4003;
-        hash = hash * 31 + Velocity.GetHashCode();
+        hash = hash * 31 + BounceCount.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (Ball*)ptr;
-        FPVector2.Serialize(&p->Velocity, serializer);
+        serializer.Stream.Serialize(&p->BounceCount);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
