@@ -31,7 +31,7 @@ namespace Quantum.Pong
             {
                 Int32 playerCount = f.Global->PlayerCount;
                 bool isOnLeft = playerCount % 2 == 0;
-                transform2D->Position = new FPVector2(isOnLeft ? FP.FromString("-10") : FP.FromString("10"), 0);
+                transform2D->Position = new FPVector2(isOnLeft ? FP.FromString("-25") : FP.FromString("25"), 0);
             }
 
             // Set player link component to mark this entity as player controller
