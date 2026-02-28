@@ -16,10 +16,8 @@ MonoBehaviour:
     Path: Photon/Pong/Resources/Settings/PongGameConfig
     Guid:
       Value: 490772527466783251
-  PaddleSpeed:
-    RawValue: 0
-  ShipSpawnDistanceToCenter:
-    RawValue: 983040
+  PaddleBaseSpeed:
+    RawValue: 1310720
   BallPrototype:
     Id:
       Value: 1328995601699114728

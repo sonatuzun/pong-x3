@@ -10,10 +10,8 @@ namespace Quantum.Pong
   public class PongGameConfig: AssetObject
   {
     [Header("Paddle Configuration")]
-    [Tooltip("The speed of the paddle")]
-    public FP PaddleSpeed;
-    [Tooltip("Distance to the center of the map. This value is the radius in a random circular location where the ship is spawned")]
-    public FP ShipSpawnDistanceToCenter = 15;
+    [Tooltip("Base speed for the paddle")]
+    public FP PaddleBaseSpeed;
 
     [Header("Ball configuration")]
     [Tooltip("Prototype reference to spawn ball")]

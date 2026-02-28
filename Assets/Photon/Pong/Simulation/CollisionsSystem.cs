@@ -2,7 +2,7 @@ using Photon.Deterministic;
 
 namespace Quantum.Pong
 {
-    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D
+    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D, ISignalOnCollision2D
     {
         public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
         {
@@ -13,7 +13,6 @@ namespace Quantum.Pong
                     HandleBallHitPaddle(f, ball);
                 }
             }
-
 
             if (f.Unsafe.TryGetPointer<GoalLine>(info.Entity, out var goalLine))
             {
@@ -30,6 +29,14 @@ namespace Quantum.Pong
 
                     f.Destroy(info.Other);
                 }
+            }
+        }
+
+        public void OnCollision2D(Frame f, CollisionInfo2D info)
+        {
+            if (f.Has<Ball>(info.Entity) && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
+            {
+                physicsBody->Velocity *= FP._1_10;
             }
         }
 

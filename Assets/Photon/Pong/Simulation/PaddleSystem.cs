@@ -8,6 +8,7 @@ namespace Quantum.Pong
         {
             public EntityRef Entity;
             public Transform2D* Transform;
+            public PhysicsBody2D* PhysicsBody;
             public Paddle* Paddle;
             public PlayerLink* PlayerLink;
         }
@@ -18,20 +19,22 @@ namespace Quantum.Pong
             Input* input = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
 
             UpdatePaddleMovement(f, ref filter, input, config);
-            LimitPaddleMovement(f, ref filter);
+            //LimitPaddleMovement(f, ref filter);
         }
 
         private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)
         {
-            //FP turnSpeed = config.ShipTurnSpeed;
             if (input->Up)
             {
-                filter.Transform->Position += FPVector2.Up;
+                filter.PhysicsBody->Velocity = FPVector2.Up * config.PaddleBaseSpeed;
             }
-
-            if (input->Down)
+            else if (input->Down)
             {
-                filter.Transform->Position += FPVector2.Down;
+                filter.PhysicsBody->Velocity = FPVector2.Down * config.PaddleBaseSpeed;
+            }
+            else
+            {
+                filter.PhysicsBody->Velocity = FPVector2.Zero;
             }
         }
 
