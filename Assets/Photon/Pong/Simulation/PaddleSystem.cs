@@ -20,10 +20,15 @@ namespace Quantum.Pong
 
             UpdatePaddleMovement(f, ref filter, input, config);
             //LimitPaddleMovement(f, ref filter);
+
+            // stablize the paddle
+            filter.PhysicsBody->AngularVelocity = -filter.Transform->Rotation;
         }
 
         private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)
         {
+            // TODO: add a paddle movement limit
+
             if (input->Up)
             {
                 filter.PhysicsBody->Velocity = FPVector2.Up * config.PaddleBaseSpeed;

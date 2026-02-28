@@ -21,16 +21,5 @@ namespace Quantum.Pong
             //filter.Transform->Position += filter.Ball->Velocity;
             //HandleBorderCollisions(f, ref filter);
         }
-
-        public void HandleBorderCollisions(Frame f, ref Filter filter)
-        {
-            PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-            FP extends = config.GameMapSize.Y / 2;
-            
-            if (FPMath.Abs(filter.Transform->Position.Y) > extends)
-            {
-                filter.Ball->Velocity.Y *= -1;
-            }
-        }
     }
 }
