@@ -693,18 +693,20 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Paddle : Quantum.IComponent {
-    public const Int32 SIZE = 4;
-    public const Int32 ALIGNMENT = 4;
+    public const Int32 SIZE = 8;
+    public const Int32 ALIGNMENT = 8;
     [FieldOffset(0)]
-    private fixed Byte _alignment_padding_[4];
+    public FP BaseX;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 10093;
+        hash = hash * 31 + BaseX.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (Paddle*)ptr;
+        FP.Serialize(&p->BaseX, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]

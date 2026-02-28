@@ -195,7 +195,7 @@ MonoBehaviour:
     RotationFreeze: 7
     InertiaMode: 0
     Mass:
-      RawValue: 655
+      RawValue: 65536
     Drag:
       RawValue: 0
     AngularDrag:
@@ -370,8 +370,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypeBall
   Prototype:
-    Velocity:
-      X:
-        RawValue: 0
-      Y:
-        RawValue: 0
+    BounceCount: 0

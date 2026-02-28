@@ -20,7 +20,7 @@ component PlayerLink {
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
 component Paddle {
-
+    FP BaseX;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]

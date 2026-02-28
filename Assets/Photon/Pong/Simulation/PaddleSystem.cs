@@ -23,6 +23,10 @@ namespace Quantum.Pong
 
             // stablize the paddle
             filter.PhysicsBody->AngularVelocity = -filter.Transform->Rotation;
+            FP baseX = filter.Paddle->BaseX;
+            FP target = input->Fire ? baseX + 5 * FPMath.Sign(baseX) : baseX;
+            FP diff = target - filter.Transform->Position.X;
+            filter.PhysicsBody->AddLinearImpulse( new FPVector2(FP.FromString("5.5") * FPMath.Sign(diff) * diff * diff, 0));
         }
 
         private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)

@@ -26,12 +26,14 @@ namespace Quantum.Pong
             EntityPrototype paddlePrototype = f.FindAsset(playerAvatarAssetRef);
             EntityRef paddleRef = f.Create(paddlePrototype);
 
+            Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(paddleRef);
+            Int32 playerCount = f.Global->PlayerCount;
+            bool isOnLeft = playerCount % 2 == 0;
+            transform->Position = new FPVector2(isOnLeft ? FP.FromString("-25") : FP.FromString("25"), 0);
 
-            if (f.Unsafe.TryGetPointer<Transform2D>(paddleRef, out var transform2D))
+            if (f.Unsafe.TryGetPointer<Paddle>(paddleRef, out var paddle))
             {
-                Int32 playerCount = f.Global->PlayerCount;
-                bool isOnLeft = playerCount % 2 == 0;
-                transform2D->Position = new FPVector2(isOnLeft ? FP.FromString("-25") : FP.FromString("25"), 0);
+                paddle->BaseX = transform->Position.X;
             }
 
             // Set player link component to mark this entity as player controller
