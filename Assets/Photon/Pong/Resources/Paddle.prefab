@@ -149,7 +149,7 @@ MonoBehaviour:
     IsTrigger: 1
     Material:
       Id:
-        Value: 0
+        Value: 354206932138541321
     SourceCollider: {fileID: 0}
     SourceShapeSettings:
       IsScaledBySource: 0
