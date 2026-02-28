@@ -24,7 +24,7 @@ MonoBehaviour:
     Id:
       Value: 1328995601699114728
   BallBaseSpeed:
-    RawValue: 131072
+    RawValue: 13107
   GameMapSize:
     X:
       RawValue: 1638400
