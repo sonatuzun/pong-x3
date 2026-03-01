@@ -77,11 +77,11 @@
     <Compile Include="Assets\QuantumUser\Simulation\SimulationConfig.User.cs" />
     <Compile Include="Assets\Photon\Pong\Simulation\BallSpawner.cs" />
     <Compile Include="Assets\Photon\Pong\Simulation\BallSystem.cs" />
-    <Compile Include="Assets\Photon\Pong\Simulation\PUtils.cs" />
     <Compile Include="Assets\Photon\Pong\Simulation\Configs\RuntimeConfig.Pong.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\SystemSetup.User.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\RuntimeConfig.User.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\Generated\Quantum.CodeGen.Prototypes.cs" />
+    <Compile Include="Assets\Photon\Pong\Simulation\PongUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\QuantumUser\Simulation\Quantum.Simulation.asmref" />

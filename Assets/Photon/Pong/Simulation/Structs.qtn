@@ -1,30 +1,43 @@
 input {
-	button Left;
-	button Right;
-	button Up;
-    button Down;
-	button Fire;
+	button P1_Up;
+button P1_Down;
+button P1_Charge;
+
+button P2_Up;
+button P2_Down;
+button P2_Charge;
 }
 
 global {
     Int32 BallCount;
-    Int32 PlayerCount;
-    Int32 Team1Score;
-    Int32 Team2Score;
+Int32 PlayerCount;
+Int32 Team1Score;
+Int32 Team2Score;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
-component PlayerLink {
+component PlayerLink
+{
     PlayerRef PlayerRef;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
-component Paddle {
+component Paddle
+{
     FP BaseX;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
-component Ball {
+component ControlFlags
+{
+    bool BotControlled;
+    bool AcceptInputForP1;
+    bool AcceptInputForP2;
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component Ball
+{
     Int32 PaddleBounceCount;
 }
 

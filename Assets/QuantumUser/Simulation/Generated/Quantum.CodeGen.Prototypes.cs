@@ -65,6 +65,25 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.ControlFlags))]
+  public unsafe partial class ControlFlagsPrototype : ComponentPrototype<Quantum.ControlFlags> {
+    public QBoolean BotControlled;
+    public QBoolean AcceptInputForP1;
+    public QBoolean AcceptInputForP2;
+    partial void MaterializeUser(Frame frame, ref Quantum.ControlFlags result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.ControlFlags component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.ControlFlags result, in PrototypeMaterializationContext context = default) {
+        result.BotControlled = this.BotControlled;
+        result.AcceptInputForP1 = this.AcceptInputForP1;
+        result.AcceptInputForP2 = this.AcceptInputForP2;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.GoalLine))]
   public unsafe partial class GoalLinePrototype : ComponentPrototype<Quantum.GoalLine> {
     public QBoolean isOnLeft;
@@ -82,18 +101,20 @@ namespace Quantum.Prototypes {
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Input))]
   public unsafe partial class InputPrototype : StructPrototype {
-    public Button Left;
-    public Button Right;
-    public Button Up;
-    public Button Down;
-    public Button Fire;
+    public Button P1_Up;
+    public Button P1_Down;
+    public Button P1_Charge;
+    public Button P2_Up;
+    public Button P2_Down;
+    public Button P2_Charge;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
-        result.Left = this.Left;
-        result.Right = this.Right;
-        result.Up = this.Up;
-        result.Down = this.Down;
-        result.Fire = this.Fire;
+        result.P1_Up = this.P1_Up;
+        result.P1_Down = this.P1_Down;
+        result.P1_Charge = this.P1_Charge;
+        result.P2_Up = this.P2_Up;
+        result.P2_Down = this.P2_Down;
+        result.P2_Charge = this.P2_Charge;
         MaterializeUser(frame, ref result, in context);
     }
   }

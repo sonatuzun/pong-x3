@@ -17,12 +17,15 @@ namespace Quantum.Pong
         public override void Update(Frame f, ref Filter filter)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-            Input* input = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
+            Input* rawInput = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
+
+            PongUtils.PaddleInput input = PongUtils.ProcessInput(rawInput, true, true);
+
 
             UpdatePaddleMovement(f, ref filter, input, config);
 
             FP baseX = filter.Paddle->BaseX;
-            FP targetX = input->Fire ? baseX + 8 * FPMath.Sign(baseX) : baseX;
+            FP targetX = input.Charge ? baseX + 8 * FPMath.Sign(baseX) : baseX;
 
             StabilizePaddle(f, ref filter, targetX);
         }
@@ -32,7 +35,7 @@ namespace Quantum.Pong
         /// Move the paddle.
         /// Limit it's movement in top and bottom.
         /// </summary>
-        private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)
+        private void UpdatePaddleMovement(Frame f, ref Filter filter, PongUtils.PaddleInput input, PongGameConfig config)
         {
             FP paddleExtent = config.PaddleBaseSize * FP._0_50;
             FP paddleSpeed = config.PaddleBaseSpeed;
@@ -42,11 +45,11 @@ namespace Quantum.Pong
             PhysicsBody2D* body = filter.PhysicsBody;
             Transform2D* transform = filter.Transform;
 
-            if (input->Up && transform->Position.Y < movementLimit)
+            if (input.Up && transform->Position.Y < movementLimit)
             {
                 body->Velocity = FPVector2.Up * paddleSpeed;
             }
-            else if (input->Down && transform->Position.Y > -movementLimit)
+            else if (input.Down && transform->Position.Y > -movementLimit)
             {
                 body->Velocity = FPVector2.Down * paddleSpeed;
             }
