@@ -29,9 +29,27 @@ MonoBehaviour:
   - kr
   - us
   - usw
-  _availableScenes: []
-  _machineId: {fileID: -755480892457977500, guid: fbd1d0c57fd428c44b08e505acb8d851,
-    type: 3}
+  _availableScenes:
+  - Name: PONG PONG PONG
+    ScenePath: Assets/Photon/Pong/Scenes/PongGameplay.unity
+    Preview: {fileID: 0}
+    RuntimeConfig:
+      GameConfig:
+        Id:
+          Value: 490772527466783251
+      DefaultPlayerAvatar:
+        Id:
+          Value: 1444795628173048101
+      Seed: 0
+      Map:
+        Id:
+          Value: 413588159688160589
+      SimulationConfig:
+        Id:
+          Value: 532101505394874754
+      SystemsConfig:
+        Id:
+          Value: 470922237895690818
+  _machineId: {fileID: -755480892457977500, guid: fbd1d0c57fd428c44b08e505acb8d851, type: 3}
   _codeGenerator: {fileID: 11400000, guid: e38f1fac5a1a5c94da2b4ef21bd48419, type: 2}
-  DefaultScenePreview: {fileID: 21300000, guid: e43d4c530865a8342957f23fe8a873b2,
-    type: 3}
+  DefaultScenePreview: {fileID: 21300000, guid: e43d4c530865a8342957f23fe8a873b2, type: 3}
