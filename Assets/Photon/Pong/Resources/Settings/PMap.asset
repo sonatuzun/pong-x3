@@ -46,7 +46,7 @@ MonoBehaviour:
       X:
         RawValue: 0
       Y:
-        RawValue: 1343488
+        RawValue: 1966080
     Height:
       RawValue: 0
     VerticalOffset:
@@ -62,7 +62,7 @@ MonoBehaviour:
       X:
         RawValue: 3276800
       Y:
-        RawValue: 32768
+        RawValue: 655360
     CapsuleSize:
       X:
         RawValue: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
       X:
         RawValue: 0
       Y:
-        RawValue: -1343488
+        RawValue: -1966080
     Height:
       RawValue: 0
     VerticalOffset:
@@ -105,7 +105,7 @@ MonoBehaviour:
       X:
         RawValue: 3276800
       Y:
-        RawValue: 32768
+        RawValue: 655360
     CapsuleSize:
       X:
         RawValue: 0

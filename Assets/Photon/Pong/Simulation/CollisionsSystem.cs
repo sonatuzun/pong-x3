@@ -36,28 +36,55 @@ namespace Quantum.Pong
         public void OnCollisionExit2D(Frame f, ExitInfo2D info)
         {
             if (f.Unsafe.TryGetPointer<Ball>(info.Entity, out var ball) 
-                && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
+                && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var body)
+                && f.Unsafe.TryGetPointer<Transform2D>(info.Entity, out var transform))
             {
-                HandleBallVelocityAfterCollision(f, ball, physicsBody, info);
+                HandleBallVelocityAfterCollision(f, ball, body, transform, info);
             }
         }
 
-        private void HandleBallVelocityAfterCollision(Frame f, Ball* ball, PhysicsBody2D* physicsBody, ExitInfo2D info)
+        private void HandleBallVelocityAfterCollision(Frame f, Ball* ball, PhysicsBody2D* ballBody, 
+            Transform2D* ballTransform, ExitInfo2D info)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
+
+            var vel = ballBody->Velocity;
+
+            // Bouncing with paddle has special implications
+            if (f.Unsafe.TryGetPointer<Paddle>(info.Other, out var paddle)
+                && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Other, out var paddleBody)
+                && f.Unsafe.TryGetPointer<Transform2D>(info.Other, out var paddleTransform))
+            {
+                // bounced from paddle
+
+                // This check prevents side collisions with the paddle to be counted as paddle bounces
+                // The ball must be going towards the center (horizontally) for it to be counted as bounce
+                if (ballBody->Velocity.X * ballTransform->Position.X < 0)
+                {                
+                    ball->PaddleBounceCount++;
+                }
+
+                // inherit some velocity from paddle for better control of the ball
+                ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, FP._0_33); //config.VerticalVelocityTransferRate;
+
+                // results in a minimum launch angle
+                ballBody->Velocity.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) * FP._0_50);
+            }
+            else
+            {
+                // bounced with wall
+
+                // vel.X shouldn't be so small with relation to vel.Y or the ball might get stuck
+                vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) * FP._0_20);
+            }
 
             // minimum ball speed increases as the ball bounces
             // it may also get faster due to physics
             // but it can never exceed the BallMaxSpeed from game config
-            var vel = physicsBody->Velocity;
             var minSpeed = FPMath.Min(config.BallBaseSpeed + ball->PaddleBounceCount * config.BallSpeedIncrement, config.BallMaxSpeed);
             vel = vel.Normalized * FPMath.Clamp(vel.Magnitude, minSpeed, config.BallMaxSpeed);
 
-            // vel.X shouldn't be so small with relation to vel.Y or the ball might get stuck
-            vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) / FP._0_20);
-
-            physicsBody->Velocity = vel;
-            ball->PaddleBounceCount++;
+            ballBody->Velocity = vel;
         }
 
         private void HandleBallHitPaddle(Frame f, Ball* ball)
