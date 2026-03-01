@@ -17,7 +17,9 @@ MonoBehaviour:
     Guid:
       Value: 490772527466783251
   PaddleBaseSpeed:
-    RawValue: 1966080
+    RawValue: 2621440
+  PaddleBaseSize:
+    RawValue: 655360
   BallPrototype:
     Id:
       Value: 1328995601699114728
@@ -31,4 +33,4 @@ MonoBehaviour:
     X:
       RawValue: 1638400
     Y:
-      RawValue: 1638400
+      RawValue: 2621440

@@ -16,6 +16,9 @@ namespace Quantum.Pong
             public Ball* Ball;
         }
 
+        // for velocity calculations of ball after collisions 
+        // check out CollisionsSystem.cs
+
         public override void Update(Frame f, ref Filter filter)
         {
             //filter.Transform->Position += filter.Ball->Velocity;

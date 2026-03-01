@@ -52,7 +52,7 @@ namespace Quantum.Prototypes {
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Ball))]
   public unsafe partial class BallPrototype : ComponentPrototype<Quantum.Ball> {
-    public Int32 BounceCount;
+    public Int32 PaddleBounceCount;
     partial void MaterializeUser(Frame frame, ref Quantum.Ball result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.Ball component = default;
@@ -60,7 +60,7 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.Ball result, in PrototypeMaterializationContext context = default) {
-        result.BounceCount = this.BounceCount;
+        result.PaddleBounceCount = this.PaddleBounceCount;
         MaterializeUser(frame, ref result, in context);
     }
   }

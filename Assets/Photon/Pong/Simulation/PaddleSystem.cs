@@ -19,30 +19,39 @@ namespace Quantum.Pong
             Input* input = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
 
             UpdatePaddleMovement(f, ref filter, input, config);
-            //LimitPaddleMovement(f, ref filter);
-
-            StablizePaddle(f, ref filter, input);
+            StabilizePaddle(f, ref filter, input);
         }
 
+        /// <summary>
+        /// Handle input.
+        /// Move the paddle.
+        /// Limit it's movement in top and bottom.
+        /// </summary>
         private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)
         {
-            // TODO: add a paddle movement limit
+            FP paddleExtent = config.PaddleBaseSize * FP._0_50;
+            FP paddleSpeed = config.PaddleBaseSpeed;
+            FP mapExtentY = config.GameMapSize.Y * FP._0_50;
+            FP movementLimit = mapExtentY - paddleExtent;
 
-            if (input->Up)
+            PhysicsBody2D* body = filter.PhysicsBody;
+            Transform2D* transform = filter.Transform;
+
+            if (input->Up && transform->Position.Y < movementLimit)
             {
-                filter.PhysicsBody->Velocity = FPVector2.Up * config.PaddleBaseSpeed;
+                body->Velocity = FPVector2.Up * paddleSpeed;
             }
-            else if (input->Down)
+            else if (input->Down && transform->Position.Y > -movementLimit)
             {
-                filter.PhysicsBody->Velocity = FPVector2.Down * config.PaddleBaseSpeed;
+                body->Velocity = FPVector2.Down * paddleSpeed;
             }
             else
             {
-                filter.PhysicsBody->Velocity = FPVector2.Zero;
+                body->Velocity = FPVector2.Zero;
             }
         }
 
-        private void StablizePaddle(Frame f, ref Filter filter, Input* input)
+        private void StabilizePaddle(Frame f, ref Filter filter, Input* input)
         {
             filter.PhysicsBody->AddAngularImpulse(-filter.Transform->Rotation * 15);
 

@@ -660,17 +660,17 @@ namespace Quantum {
     public const Int32 SIZE = 4;
     public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
-    public Int32 BounceCount;
+    public Int32 PaddleBounceCount;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 4003;
-        hash = hash * 31 + BounceCount.GetHashCode();
+        hash = hash * 31 + PaddleBounceCount.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (Ball*)ptr;
-        serializer.Stream.Serialize(&p->BounceCount);
+        serializer.Stream.Serialize(&p->PaddleBounceCount);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
