@@ -138,6 +138,7 @@ MonoBehaviour:
     - rid: 6415189848121933825
     - rid: 6415189848121933826
     - rid: 6415189848121933827
+  - Components: []
   SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2

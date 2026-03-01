@@ -609,12 +609,12 @@ namespace Quantum {
     public BitSet6 PlayerLastConnectionState;
     [FieldOffset(1048)]
     public Int32 BallCount;
-    [FieldOffset(1052)]
-    public Int32 PlayerCount;
     [FieldOffset(1056)]
     public Int32 Team1Score;
     [FieldOffset(1060)]
     public Int32 Team2Score;
+    [FieldOffset(1052)]
+    public Int32 PaddleCount;
     public readonly FixedArray<Input> input {
       get {
         fixed (byte* p = _input_) { return new FixedArray<Input>(p, 72, 6); }
@@ -636,9 +636,9 @@ namespace Quantum {
         hash = hash * 31 + HashCodeUtils.GetArrayHashCode(input);
         hash = hash * 31 + PlayerLastConnectionState.GetHashCode();
         hash = hash * 31 + BallCount.GetHashCode();
-        hash = hash * 31 + PlayerCount.GetHashCode();
         hash = hash * 31 + Team1Score.GetHashCode();
         hash = hash * 31 + Team2Score.GetHashCode();
+        hash = hash * 31 + PaddleCount.GetHashCode();
         return hash;
       }
     }
@@ -657,7 +657,7 @@ namespace Quantum {
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
         serializer.Stream.Serialize(&p->BallCount);
-        serializer.Stream.Serialize(&p->PlayerCount);
+        serializer.Stream.Serialize(&p->PaddleCount);
         serializer.Stream.Serialize(&p->Team1Score);
         serializer.Stream.Serialize(&p->Team2Score);
     }
@@ -740,6 +740,24 @@ namespace Quantum {
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (Paddle*)ptr;
         FP.Serialize(&p->BaseX, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct PlayerInfo : Quantum.IComponent {
+    public const Int32 SIZE = 4;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(0)]
+    public QBoolean IsSingleKeyboardMultiplayer;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 13049;
+        hash = hash * 31 + IsSingleKeyboardMultiplayer.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (PlayerInfo*)ptr;
+        QBoolean.Serialize(&p->IsSingleKeyboardMultiplayer, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -834,6 +852,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<PhysicsJoints2D>();
       BuildSignalsArrayOnComponentAdded<PhysicsJoints3D>();
       BuildSignalsArrayOnComponentRemoved<PhysicsJoints3D>();
+      BuildSignalsArrayOnComponentAdded<Quantum.PlayerInfo>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.PlayerInfo>();
       BuildSignalsArrayOnComponentAdded<Quantum.PlayerLink>();
       BuildSignalsArrayOnComponentRemoved<Quantum.PlayerLink>();
       BuildSignalsArrayOnComponentAdded<Transform2D>();
@@ -982,6 +1002,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(PhysicsJoints3D), PhysicsJoints3D.SIZE);
       typeRegistry.Register(typeof(PhysicsQueryRef), PhysicsQueryRef.SIZE);
       typeRegistry.Register(typeof(PhysicsSceneSettings), PhysicsSceneSettings.SIZE);
+      typeRegistry.Register(typeof(Quantum.PlayerInfo), Quantum.PlayerInfo.SIZE);
       typeRegistry.Register(typeof(Quantum.PlayerLink), Quantum.PlayerLink.SIZE);
       typeRegistry.Register(typeof(PlayerRef), PlayerRef.SIZE);
       typeRegistry.Register(typeof(Ptr), Ptr.SIZE);
@@ -1000,12 +1021,13 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 5)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 6)
         .AddBuiltInComponents()
         .Add<Quantum.Ball>(Quantum.Ball.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.ControlFlags>(Quantum.ControlFlags.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.GoalLine>(Quantum.GoalLine.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Paddle>(Quantum.Paddle.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.PlayerInfo>(Quantum.PlayerInfo.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerLink>(Quantum.PlayerLink.Serialize, null, null, ComponentFlags.None)
         .Finish();
     }

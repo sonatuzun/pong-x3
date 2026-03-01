@@ -9,9 +9,8 @@ namespace Quantum
     /// Reference to the game configuration asset, specifying various settings for the Asteroids game.
     /// </summary>
     public AssetRef<Pong.PongGameConfig> GameConfig;
-    /// <summary>
-    /// Reference to the default player avatar prototype to be used when creating player entities.
-    /// </summary>
-    public AssetRef<EntityPrototype> DefaultPlayerAvatar;
+
+    public AssetRef<EntityPrototype> DefaultPlayerInfo;
+    public AssetRef<EntityPrototype> DefaultPaddle;
   }
 }

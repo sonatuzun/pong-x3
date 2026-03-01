@@ -1,4 +1,5 @@
 using Photon.Deterministic;
+using Quantum.Prototypes;
 using System;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
@@ -11,6 +12,8 @@ namespace Quantum.Pong
     /// </summary>
     public unsafe class PlayerSystem : SystemSignalsOnly, ISignalOnPlayerAdded, ISignalOnPlayerDisconnected
     {
+        public AssetRef<EntityPrototype> paddlePrototype;
+
         /// <summary>
         /// Called when a new player is added to the game. This method creates a paddle entity for the player,
         /// sets up the player link component, and triggers the ship spawn signal.
@@ -21,16 +24,38 @@ namespace Quantum.Pong
         public void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime)
         {
             RuntimePlayer data = f.GetPlayerData(player);
-            AssetRef<EntityPrototype> paddleAsset = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerAvatar;
+            AssetRef<EntityPrototype> playerPrototype = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerInfo;
+            AssetRef<EntityPrototype> paddle = f.RuntimeConfig.DefaultPaddle;
+            EntityRef playerRef = f.Create(playerPrototype);
 
-            ControlFlags flags;
-            flags.BotControlled = false;
-            flags.AcceptInputForP1 = true;
-            flags.AcceptInputForP2 = true;
+            if (f.Unsafe.TryGetPointer<PlayerInfo>(playerRef, out var playerInfo))
+            {
+                if (playerInfo->IsSingleKeyboardMultiplayer)
+                {
+                    ControlFlags flags1;
+                    flags1.BotControlled = false;
+                    flags1.AcceptInputForP1 = true;
+                    flags1.AcceptInputForP2 = false;
 
-            SpawnPaddle(f, paddleAsset, flags, player);
+                    SpawnPaddle(f, paddle, flags1, player);
 
-            f.Global->PlayerCount++;
+                    ControlFlags flags2;
+                    flags2.BotControlled = false;
+                    flags2.AcceptInputForP1 = false;
+                    flags2.AcceptInputForP2 = true;
+
+                    SpawnPaddle(f, paddle, flags2, player);
+                }
+                else
+                {
+                    ControlFlags flags;
+                    flags.BotControlled = false;
+                    flags.AcceptInputForP1 = true;
+                    flags.AcceptInputForP2 = true;
+
+                    SpawnPaddle(f, paddle, flags, player);
+                }
+            }
         }
 
         public void SpawnPaddle(Frame f, AssetRef<EntityPrototype> paddleAsset, ControlFlags flags, PlayerRef? player = null)
@@ -40,7 +65,7 @@ namespace Quantum.Pong
             EntityRef paddleRef = f.Create(paddlePrototype);
 
             Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(paddleRef);
-            Int32 playerCount = f.Global->PlayerCount;
+            Int32 playerCount = f.Global->PaddleCount;
             bool isOnLeft = playerCount % 2 == 0;
             transform->Position = new FPVector2(isOnLeft ? FP.FromString("-25") : FP.FromString("25"), 0);
 
@@ -57,6 +82,8 @@ namespace Quantum.Pong
             {
                 f.Set(paddleRef, new PlayerLink { PlayerRef = player.Value });
             }
+
+            f.Global->PaddleCount++;
         }
 
         /// <summary>

@@ -23,7 +23,6 @@ namespace Quantum.Pong
             ControlFlags* flags = filter.ControlFlags;
             PongUtils.PaddleInput input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
 
-
             UpdatePaddleMovement(f, ref filter, input, config);
 
             FP baseX = filter.Paddle->BaseX;
