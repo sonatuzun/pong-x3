@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypeGoalLine.cs" />
-    <Compile Include="Assets\Photon\Pong\View\Cosmetics\LeafBehaviour.cs" />
     <Compile Include="Assets\Photon\Pong\View\PongQuantumInput.cs" />
     <Compile Include="Assets\Photon\Pong\View\PaddleView.cs" />
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypePlayerLink.cs" />
