@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 1562651063633415736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0067, y: 0.0646, z: 0}
-  m_LocalScale: {x: 1.0135272, y: 9.178804, z: 1}
+  m_LocalPosition: {x: 0.0057, y: -0.0134, z: 0}
+  m_LocalScale: {x: 2.122322, y: 8.022753, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 791943743946163433}
@@ -171,7 +171,7 @@ MonoBehaviour:
         RawValue: 32768
       BoxExtents:
         X:
-          RawValue: 32768
+          RawValue: 98304
         Y:
           RawValue: 327680
       PositionOffset:
@@ -222,7 +222,7 @@ MonoBehaviour:
       Value: 4095
   PhysicsBody:
     IsEnabled: 1
-    Config2D: 116
+    Config2D: 244
     Config3D: 58
     RotationFreeze: 0
     InertiaMode: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
     Drag:
       RawValue: 32768
     AngularDrag:
-      RawValue: 32768
+      RawValue: 458752
     ExplicitInertia2D:
       RawValue: 65536
     ExplicitInertia3D:
@@ -402,4 +402,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypePaddle
   Prototype:
-    _empty_prototype_dummy_field_: 0
+    BaseX:
+      RawValue: 0

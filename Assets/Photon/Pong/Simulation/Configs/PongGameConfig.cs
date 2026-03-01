@@ -18,7 +18,11 @@ namespace Quantum.Pong
     public AssetRef<EntityPrototype> BallPrototype;
     [Tooltip("Base speed for the ball")]
     public FP BallBaseSpeed = 15;
-    
+    [Tooltip("Maximum speed for the ball")]
+    public FP BallMaxSpeed = 100;
+    [Tooltip("Maximum speed for the ball")]
+    public FP BallSpeedIncrement = 5;
+
     [Header("Map configuration")]
     [Tooltip("Total size of the map. This is used to calculate when an entity is outside de gameplay area and then wrap it to the other side")]
     public FPVector2 GameMapSize = new FPVector2(25, 25);

@@ -37,22 +37,23 @@ namespace Quantum.Pong
         {
             if (f.Unsafe.TryGetPointer<Ball>(info.Entity, out var ball) && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var physicsBody))
             {
-                HandleBallCollision(f, ball, physicsBody);
+                HandleBallVelocityAfterCollision(f, ball, physicsBody);
             }
         }
 
-        private void HandleBallCollision(Frame f, Ball* ball, PhysicsBody2D* physicsBody)
+        private void HandleBallVelocityAfterCollision(Frame f, Ball* ball, PhysicsBody2D* physicsBody)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
 
+            // minimum ball speed increases as the ball bounces
+            // it may also get faster due to physics
+            // but it can never exceed the BallMaxSpeed from game config
             var vel = physicsBody->Velocity;
-            int ballSpeedIncrement = 5;
-            var minSpeed = config.BallBaseSpeed + ball->BounceCount * ballSpeedIncrement;
+            var minSpeed = FPMath.Min(config.BallBaseSpeed + ball->BounceCount * config.BallSpeedIncrement, config.BallMaxSpeed);
+            vel = vel.Normalized * FPMath.Clamp(vel.Magnitude, minSpeed, config.BallMaxSpeed);
 
-            vel = vel.Normalized * FPMath.Max(minSpeed, vel.Magnitude);
-
-            // vel.X should be greater than vel.Y or the ball can stuck
-            vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y));
+            // vel.X shouldn't be so small with relation to vel.Y or the ball might get stuck
+            vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) / FP._0_20);
 
             physicsBody->Velocity = vel;
             ball->BounceCount++;

@@ -17,12 +17,16 @@ MonoBehaviour:
     Guid:
       Value: 490772527466783251
   PaddleBaseSpeed:
-    RawValue: 1310720
+    RawValue: 1966080
   BallPrototype:
     Id:
       Value: 1328995601699114728
   BallBaseSpeed:
     RawValue: 1310720
+  BallMaxSpeed:
+    RawValue: 6553600
+  BallSpeedIncrement:
+    RawValue: 327680
   GameMapSize:
     X:
       RawValue: 1638400

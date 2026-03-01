@@ -21,12 +21,7 @@ namespace Quantum.Pong
             UpdatePaddleMovement(f, ref filter, input, config);
             //LimitPaddleMovement(f, ref filter);
 
-            // stablize the paddle
-            filter.PhysicsBody->AngularVelocity = -filter.Transform->Rotation;
-            FP baseX = filter.Paddle->BaseX;
-            FP target = input->Fire ? baseX + 5 * FPMath.Sign(baseX) : baseX;
-            FP diff = target - filter.Transform->Position.X;
-            filter.PhysicsBody->AddLinearImpulse( new FPVector2(FP.FromString("5.5") * FPMath.Sign(diff) * diff * diff, 0));
+            StablizePaddle(f, ref filter, input);
         }
 
         private void UpdatePaddleMovement(Frame f, ref Filter filter, Input* input, PongGameConfig config)
@@ -45,6 +40,16 @@ namespace Quantum.Pong
             {
                 filter.PhysicsBody->Velocity = FPVector2.Zero;
             }
+        }
+
+        private void StablizePaddle(Frame f, ref Filter filter, Input* input)
+        {
+            filter.PhysicsBody->AddAngularImpulse(-filter.Transform->Rotation * 15);
+
+            FP baseX = filter.Paddle->BaseX;
+            FP target = input->Fire ? baseX + 8 * FPMath.Sign(baseX) : baseX;
+            FP diff = target - filter.Transform->Position.X;
+            filter.PhysicsBody->AddLinearImpulse(new FPVector2(FP.FromString("1.5") * FPMath.Sign(diff) * diff * diff, 0));
         }
 
         public void LimitPaddleMovement(Frame f, ref Filter filter)

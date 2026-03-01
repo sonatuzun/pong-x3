@@ -195,7 +195,7 @@ MonoBehaviour:
     RotationFreeze: 7
     InertiaMode: 0
     Mass:
-      RawValue: 65536
+      RawValue: 6554
     Drag:
       RawValue: 0
     AngularDrag:
