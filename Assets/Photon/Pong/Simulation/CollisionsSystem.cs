@@ -56,25 +56,25 @@ namespace Quantum.Pong
             {
                 // This check prevents side collisions with the paddle to be counted as paddle bounces
                 // The ball must be going towards the center (horizontally) for it to be counted as bounce
-                bool validBounce = ballBody->Velocity.X * ballTransform->Position.X < 0;
+                bool validBounce = (ballBody->Velocity.X * ballTransform->Position.X) < 0;
 
                 if (validBounce)
                 {                
                     ball->PaddleBounceCount++;
 
-                    // inherit some velocity from paddle for better control of the ball
-                    ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, FP._0_33); //config.VerticalVelocityTransferRate;
-
-                    // results in a minimum launch angle
-                    ballBody->Velocity.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) * FP._0_50);
+                    // inherit some vertical velocity from paddle
+                    ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, config.VelocityTransferRate);
                 }
             }
 
-            // minimum ball speed increases as the ball bounces
+            // minimum ball speed increases as the ball bounces but does not exceed the maximimum ball speed
             // it may also get faster due to physics
             // but it can never exceed the BallMaxSpeed from game config
             var minSpeed = FPMath.Min(config.BallBaseSpeed + ball->PaddleBounceCount * config.BallSpeedIncrement, config.BallMaxSpeed);
             vel = vel.Normalized * FPMath.Clamp(vel.Magnitude, minSpeed, config.BallMaxSpeed);
+
+            // a minimum vel.X prevents the ball from getting stuck
+            vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), config.BallMinHorizontalSpeed);
 
             ballBody->Velocity = vel;
         }

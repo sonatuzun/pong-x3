@@ -61,21 +61,6 @@ namespace Quantum.Pong
             filter.PhysicsBody->AddLinearImpulse(new FPVector2(FP.FromString("1.5") * FPMath.Sign(diff) * diff * diff, 0));
         }
 
-        public void LimitPaddleMovement(Frame f, ref Filter filter)
-        {
-            PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-            FP extend = config.GameMapSize.Y / FP.FromString("2");
-            FP y = filter.Transform->Position.Y;
-
-            if (y > extend)
-            {
-                filter.Transform->Position.Y = extend;
-            }
-            else if (y < -extend)
-            {
-                filter.Transform->Position.Y = -extend;
-            }
-        }
 
         public void SpawnPaddle(Frame f, EntityRef paddle)
         {

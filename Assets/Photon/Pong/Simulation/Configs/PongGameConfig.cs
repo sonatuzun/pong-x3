@@ -20,8 +20,14 @@ namespace Quantum.Pong
         public FP BallBaseSpeed = 15;
         [Tooltip("Maximum speed for the ball")]
         public FP BallMaxSpeed = 100;
-        [Tooltip("Maximum speed for the ball")]
+        [Tooltip("Speed increment for each paddle hit.")]
         public FP BallSpeedIncrement = 5;
+        [Tooltip("Minimum horizontal ball speed. Prevents the ball from being stuck.")]
+        public FP BallMinHorizontalSpeed = 5;
+
+        [Header("Ball Paddle Interaction")]
+        [Tooltip("The rate at vertical paddle movement influences the ball.")]
+        public FP VelocityTransferRate = FP._0_50;
 
         [Header("Map configuration")]
         [Tooltip("Total size of the map. This is used to calculate when an entity is outside de gameplay area and then wrap it to the other side")]
