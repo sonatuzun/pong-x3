@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 579480501544827283}
   - component: {fileID: 6459623938907389998}
   - component: {fileID: 3767483503829176131}
+  - component: {fileID: 1728385811968258517}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -404,3 +405,22 @@ MonoBehaviour:
   Prototype:
     BaseX:
       RawValue: 0
+--- !u!114 &1728385811968258517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030893378180684113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eb97311df71204e86607544a23770e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Asteroids.Unity::Quantum.QPrototypeControlFlags
+  Prototype:
+    BotControlled:
+      Value: 0
+    AcceptInputForP1:
+      Value: 0
+    AcceptInputForP2:
+      Value: 0

@@ -16,7 +16,7 @@ namespace Quantum.Pong
             PaddleInput res = new PaddleInput();
 
             res.Up = (rawInput->P1_Up && includeP1) || (rawInput->P2_Up && includeP2);
-            res.Down = (rawInput->P1_Down && includeP1) || (rawInput->P2_Down && includeP2);
+            res.Down = (rawInput->P2_Down && includeP1) || (rawInput->P2_Down && includeP2);
             res.Charge = (rawInput->P1_Charge && includeP1) || (rawInput->P2_Charge && includeP2);
 
             return res;

@@ -1,5 +1,6 @@
 using Photon.Deterministic;
 using System;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace Quantum.Pong
 {
@@ -20,10 +21,22 @@ namespace Quantum.Pong
         public void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime)
         {
             RuntimePlayer data = f.GetPlayerData(player);
+            AssetRef<EntityPrototype> paddleAsset = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerAvatar;
 
-            // Create a ship entity from the provided prototype or the default prototype from the RuntimeConfig
-            var playerAvatarAssetRef = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerAvatar;
-            EntityPrototype paddlePrototype = f.FindAsset(playerAvatarAssetRef);
+            ControlFlags flags;
+            flags.BotControlled = false;
+            flags.AcceptInputForP1 = true;
+            flags.AcceptInputForP2 = true;
+
+            SpawnPaddle(f, paddleAsset, flags, player);
+
+            f.Global->PlayerCount++;
+        }
+
+        public void SpawnPaddle(Frame f, AssetRef<EntityPrototype> paddleAsset, ControlFlags flags, PlayerRef? player = null)
+        {
+            // Create a paddle entity from the provided prototype or the default prototype from the RuntimeConfig
+            EntityPrototype paddlePrototype = f.FindAsset(paddleAsset);
             EntityRef paddleRef = f.Create(paddlePrototype);
 
             Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(paddleRef);
@@ -36,10 +49,14 @@ namespace Quantum.Pong
                 paddle->BaseX = transform->Position.X;
             }
 
-            // Set player link component to mark this entity as player controller
-            f.Set(paddleRef, new PlayerLink { PlayerRef = player });
+            // Set control flags for the paddle 
+            f.Set(paddleRef, flags);
 
-            f.Global->PlayerCount++;
+            // Set player link component to mark this entity as player controller
+            if (player.HasValue)
+            {
+                f.Set(paddleRef, new PlayerLink { PlayerRef = player.Value });
+            }
         }
 
         /// <summary>

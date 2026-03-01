@@ -11,6 +11,7 @@ namespace Quantum.Pong
             public Transform2D* Transform;
             public PhysicsBody2D* PhysicsBody;
             public Paddle* Paddle;
+            public ControlFlags* ControlFlags;
             public PlayerLink* PlayerLink;
         }
 
@@ -19,7 +20,8 @@ namespace Quantum.Pong
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
             Input* rawInput = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
 
-            PongUtils.PaddleInput input = PongUtils.ProcessInput(rawInput, true, true);
+            ControlFlags* flags = filter.ControlFlags;
+            PongUtils.PaddleInput input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
 
 
             UpdatePaddleMovement(f, ref filter, input, config);
