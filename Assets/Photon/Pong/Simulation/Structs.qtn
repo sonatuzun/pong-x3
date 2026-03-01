@@ -57,5 +57,5 @@ component GoalLine
 
 signal Team1Scored();
 signal Team2Scored();
-signal BallHitPaddle();
+signal SpawnNewBall();
 signal SpawnPaddle(EntityRef paddle);

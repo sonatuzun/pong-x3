@@ -784,8 +784,8 @@ namespace Quantum {
   public unsafe partial interface ISignalTeam2Scored : ISignal {
     void Team2Scored(Frame f);
   }
-  public unsafe partial interface ISignalBallHitPaddle : ISignal {
-    void BallHitPaddle(Frame f);
+  public unsafe partial interface ISignalSpawnNewBall : ISignal {
+    void SpawnNewBall(Frame f);
   }
   public unsafe partial interface ISignalSpawnPaddle : ISignal {
     void SpawnPaddle(Frame f, EntityRef paddle);
@@ -795,7 +795,7 @@ namespace Quantum {
   public unsafe partial class Frame {
     private ISignalTeam1Scored[] _ISignalTeam1ScoredSystems;
     private ISignalTeam2Scored[] _ISignalTeam2ScoredSystems;
-    private ISignalBallHitPaddle[] _ISignalBallHitPaddleSystems;
+    private ISignalSpawnNewBall[] _ISignalSpawnNewBallSystems;
     private ISignalSpawnPaddle[] _ISignalSpawnPaddleSystems;
     partial void AllocGen() {
       _globals = (_globals_*)Context.Allocator.AllocAndClear(sizeof(_globals_));
@@ -810,7 +810,7 @@ namespace Quantum {
       Initialize(this, this.SimulationConfig.Entities, 256);
       _ISignalTeam1ScoredSystems = BuildSignalsArray<ISignalTeam1Scored>();
       _ISignalTeam2ScoredSystems = BuildSignalsArray<ISignalTeam2Scored>();
-      _ISignalBallHitPaddleSystems = BuildSignalsArray<ISignalBallHitPaddle>();
+      _ISignalSpawnNewBallSystems = BuildSignalsArray<ISignalSpawnNewBall>();
       _ISignalSpawnPaddleSystems = BuildSignalsArray<ISignalSpawnPaddle>();
       _ComponentSignalsOnAdded = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
       _ComponentSignalsOnRemoved = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
@@ -905,12 +905,12 @@ namespace Quantum {
           }
         }
       }
-      public void BallHitPaddle() {
-        var array = _f._ISignalBallHitPaddleSystems;
+      public void SpawnNewBall() {
+        var array = _f._ISignalSpawnNewBallSystems;
         for (Int32 i = 0; i < array.Length; ++i) {
           var s = array[i];
           if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.BallHitPaddle(_f);
+            s.SpawnNewBall(_f);
           }
         }
       }

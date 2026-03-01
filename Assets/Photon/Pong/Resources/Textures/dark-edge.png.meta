@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ce3d77d78d84d50409b5579bf852c952
+guid: 8843298799bf2bf4588cc8abb3e501de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8986785736665300055
-    second: pongx3 bg3_0
+      213: -4408585809008435646
+    second: dark-edge_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pongx3 bg3_0
+      name: dark-edge_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a3848d8cf5884380800000000000000
-      internalID: -8986785736665300055
+      spriteID: 24e593c709e81d2c0800000000000000
+      internalID: -4408585809008435646
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pongx3 bg3_0: -8986785736665300055
+      dark-edge_0: -4408585809008435646
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

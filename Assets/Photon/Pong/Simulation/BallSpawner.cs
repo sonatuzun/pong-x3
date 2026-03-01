@@ -3,21 +3,17 @@ using Photon.Deterministic;
 namespace Quantum.Pong
 {
 
-    public unsafe class BallSpawner : SystemSignalsOnly,
-      ISignalOnComponentRemoved<Ball>
+    public unsafe class BallSpawner : SystemSignalsOnly, ISignalSpawnNewBall
     {
         public override void OnInit(Frame f)
         {
             SpawnBall(f);
         }
 
-        public void OnRemoved(Frame f, EntityRef entity, Ball* component)
+        public void SpawnNewBall(Frame f)
         {
-            if (f.ComponentCount<Ball>(false) <= 1)
-            {
-                PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-                SpawnBall(f);
-            }
+            PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
+            SpawnBall(f);
         }
 
         public void SpawnBall(Frame f)

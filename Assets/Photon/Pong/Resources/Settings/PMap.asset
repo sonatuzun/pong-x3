@@ -172,12 +172,12 @@ MonoBehaviour:
             RawValue: 32768
           BoxExtents:
             X:
-              RawValue: 327680
+              RawValue: 655360
             Y:
               RawValue: 1310720
           PositionOffset:
             X:
-              RawValue: 0
+              RawValue: -655360
             Y:
               RawValue: 0
           RotationOffset:
@@ -229,12 +229,12 @@ MonoBehaviour:
             RawValue: 32768
           BoxExtents:
             X:
-              RawValue: 327680
+              RawValue: 655360
             Y:
               RawValue: 1310720
           PositionOffset:
             X:
-              RawValue: 0
+              RawValue: 655360
             Y:
               RawValue: 0
           RotationOffset:

@@ -3,33 +3,32 @@ using UnityEngine.LowLevelPhysics2D;
 
 namespace Quantum.Pong
 {
-    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D, ISignalOnCollisionExit2D
+    public unsafe class CollisionsSystem : SystemSignalsOnly, ISignalOnTriggerEnter2D, ISignalOnTriggerExit2D, ISignalOnCollisionExit2D
     {
         public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
         {
-            if (f.Unsafe.TryGetPointer<Paddle>(info.Entity, out var paddle))
+            if (f.Unsafe.TryGetPointer<GoalLine>(info.Entity, out var goalLine)
+                && f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
             {
-                if (f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
+                if (goalLine->isOnLeft)
                 {
-                    HandleBallHitPaddle(f, ball);
+                    f.Global->Team2Score++;
                 }
+                else
+                {
+                    f.Global->Team1Score++;
+                }
+
             }
+        }
 
-            if (f.Unsafe.TryGetPointer<GoalLine>(info.Entity, out var goalLine))
+        public void OnTriggerExit2D(Frame f, ExitInfo2D info)
+        {
+            if (f.Unsafe.TryGetPointer<GoalLine>(info.Entity, out var goalLine)
+                && f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
             {
-                if (f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
-                {
-                    if (goalLine->isOnLeft)
-                    {
-                        f.Global->Team2Score++;
-                    }
-                    else
-                    {
-                        f.Global->Team1Score++;
-                    }
-
-                    f.Destroy(info.Other);
-                }
+                f.Destroy(info.Other);
+                f.Signals.SpawnNewBall();
             }
         }
 
@@ -77,11 +76,6 @@ namespace Quantum.Pong
             vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), config.BallMinHorizontalSpeed);
 
             ballBody->Velocity = vel;
-        }
-
-        private void HandleBallHitPaddle(Frame f, Ball* ball)
-        {
-            //ball->Velocity.X *= -1;
         }
     }
 }
