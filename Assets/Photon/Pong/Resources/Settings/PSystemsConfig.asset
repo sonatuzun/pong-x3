@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PSystemsConfig
   m_EditorClassIdentifier: 
   Identifier:
-    Path: Photon/Pong/Resources/PSystemsConfig
+    Path: Photon/Pong/Resources/Settings/PSystemsConfig
     Guid:
       Value: 470922237895690818
   Entries:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BouncyPhysicsMaterial
   m_EditorClassIdentifier: Quantum.Engine.dll::Quantum.PhysicsMaterial
   Identifier:
-    Path: Photon/Pong/Resources/BouncyPhysicsMaterial
+    Path: Photon/Pong/Resources/Materials/BouncyPhysicsMaterial
     Guid:
       Value: 454435896808641090
   Restitution:
