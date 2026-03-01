@@ -70,7 +70,7 @@ namespace Quantum.Asteroids
             var p1_move = _p1_move.ReadValue<Vector2>();
             input.P1_Charge = _p1_charge.IsPressed();
             input.P1_Up = p1_move.y > 0.7f;
-            input.P2_Down = p1_move.y < -0.7f;
+            input.P1_Down = p1_move.y < -0.7f;
 
             var p2_move = _p2_move.ReadValue<Vector2>();
             input.P2_Charge = _p2_charge.IsPressed();
