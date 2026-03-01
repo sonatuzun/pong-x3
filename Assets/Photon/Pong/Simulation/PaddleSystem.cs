@@ -1,6 +1,7 @@
 namespace Quantum.Pong
 {
     using Photon.Deterministic;
+    using System.Buffers.Text;
 
     public unsafe class PaddleSystem : SystemMainThreadFilter<PaddleSystem.Filter>, ISignalSpawnPaddle
     {
@@ -19,7 +20,11 @@ namespace Quantum.Pong
             Input* input = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
 
             UpdatePaddleMovement(f, ref filter, input, config);
-            StabilizePaddle(f, ref filter, input);
+
+            FP baseX = filter.Paddle->BaseX;
+            FP targetX = input->Fire ? baseX + 8 * FPMath.Sign(baseX) : baseX;
+
+            StabilizePaddle(f, ref filter, targetX);
         }
 
         /// <summary>
@@ -51,13 +56,11 @@ namespace Quantum.Pong
             }
         }
 
-        private void StabilizePaddle(Frame f, ref Filter filter, Input* input)
+        private void StabilizePaddle(Frame f, ref Filter filter, FP targetX)
         {
             filter.PhysicsBody->AddAngularImpulse(-filter.Transform->Rotation * 15);
 
-            FP baseX = filter.Paddle->BaseX;
-            FP target = input->Fire ? baseX + 8 * FPMath.Sign(baseX) : baseX;
-            FP diff = target - filter.Transform->Position.X;
+            FP diff = targetX - filter.Transform->Position.X;
             filter.PhysicsBody->AddLinearImpulse(new FPVector2(FP.FromString("1.5") * FPMath.Sign(diff) * diff * diff, 0));
         }
 

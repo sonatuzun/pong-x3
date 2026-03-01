@@ -11,7 +11,7 @@ namespace Quantum.Pong
     public unsafe class PlayerSystem : SystemSignalsOnly, ISignalOnPlayerAdded, ISignalOnPlayerDisconnected
     {
         /// <summary>
-        /// Called when a new player is added to the game. This method creates a ship entity for the player,
+        /// Called when a new player is added to the game. This method creates a paddle entity for the player,
         /// sets up the player link component, and triggers the ship spawn signal.
         /// </summary>
         /// <param name="f">The game frame.</param>
