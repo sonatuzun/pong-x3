@@ -69,13 +69,6 @@ namespace Quantum.Pong
                     ballBody->Velocity.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) * FP._0_50);
                 }
             }
-            else
-            {
-                // bounced with wall
-
-                // vel.X shouldn't be so small with relation to vel.Y or the ball might get stuck
-                // vel.X = FPMath.Sign(vel.X) * FPMath.Max(FPMath.Abs(vel.X), FPMath.Abs(vel.Y) * FP._0_20);
-            }
 
             // minimum ball speed increases as the ball bounces
             // it may also get faster due to physics
