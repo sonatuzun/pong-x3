@@ -62,8 +62,14 @@ namespace Quantum.Pong
                     ball->PaddleBounceCount++;
 
                     // inherit some vertical velocity from paddle
-                    ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, config.VelocityTransferRate);
+                    //ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, config.VelocityTransferRate);
                 }
+            }
+            // Bounced from wall
+            else
+            {
+                // Lose some vertical velocity to make ball easier to hit
+                vel.Y *= FP.FromString("0.9");
             }
 
             // minimum ball speed increases as the ball bounces but does not exceed the maximimum ball speed

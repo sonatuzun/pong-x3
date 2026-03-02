@@ -12,6 +12,10 @@ namespace Quantum.Pong
         // They are here to use for calculations
         [Tooltip("Base size for the paddle.")]
         public FP PaddleBaseSize = 10;
+        public FP PaddleDistanceToCenter = 30;
+        public FP PaddleChargeDistance = 8;
+        public FP PaddleChargeForce = 10;
+
 
         [Header("Ball configuration")]
         [Tooltip("Prototype reference to spawn ball")]

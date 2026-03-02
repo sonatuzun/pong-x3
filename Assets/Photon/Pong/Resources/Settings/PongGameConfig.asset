@@ -20,6 +20,12 @@ MonoBehaviour:
     RawValue: 2621440
   PaddleBaseSize:
     RawValue: 655360
+  PaddleDistanceToCenter:
+    RawValue: 1966080
+  PaddleChargeDistance:
+    RawValue: 524288
+  PaddleChargeForce:
+    RawValue: 655360
   BallPrototype:
     Id:
       Value: 1328995601699114728
@@ -29,6 +35,10 @@ MonoBehaviour:
     RawValue: 6553600
   BallSpeedIncrement:
     RawValue: 327680
+  BallMinHorizontalSpeed:
+    RawValue: 327680
+  VelocityTransferRate:
+    RawValue: 32768
   GameMapSize:
     X:
       RawValue: 1638400

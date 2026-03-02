@@ -63,11 +63,12 @@ namespace Quantum.Pong
             // Create a paddle entity from the provided prototype or the default prototype from the RuntimeConfig
             EntityPrototype paddlePrototype = f.FindAsset(paddleAsset);
             EntityRef paddleRef = f.Create(paddlePrototype);
+            PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
 
             Transform2D* transform = f.Unsafe.GetPointer<Transform2D>(paddleRef);
             Int32 playerCount = f.Global->PaddleCount;
             bool isOnLeft = playerCount % 2 == 0;
-            transform->Position = new FPVector2(isOnLeft ? FP.FromString("-25") : FP.FromString("25"), 0);
+            transform->Position = new FPVector2(isOnLeft ? -config.PaddleDistanceToCenter : config.PaddleDistanceToCenter, 0);
 
             if (f.Unsafe.TryGetPointer<Paddle>(paddleRef, out var paddle))
             {

@@ -29,9 +29,7 @@ namespace Quantum.Pong
 
         public override void Update(Frame f, ref Filter filter)
         {
-            //filter.Transform->Position += filter.Ball->Velocity;
-            filter.PhysicsCollider.Shape.BroadRadius = 10;
-            //HandleBorderCollisions(f, ref filter);
+            
         }
     }
 }

@@ -28,9 +28,9 @@ namespace Quantum.Pong
             UpdatePaddleMovement(f, ref filter, input, config);
 
             FP baseX = filter.Paddle->BaseX;
-            FP targetX = input.Charge ? baseX + 8 * FPMath.Sign(baseX) : baseX;
+            FP targetX = input.Charge ? baseX + config.PaddleChargeDistance * FPMath.Sign(baseX) : baseX;
 
-            StabilizePaddle(f, ref filter, targetX);
+            StabilizePaddle(f, ref filter, targetX, config);
         }
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace Quantum.Pong
             }
         }
 
-        private void StabilizePaddle(Frame f, ref Filter filter, FP targetX)
+        private void StabilizePaddle(Frame f, ref Filter filter, FP targetX, PongGameConfig config)
         {
             filter.PhysicsBody->AddAngularImpulse(-filter.Transform->Rotation * 15);
 
             FP diff = targetX - filter.Transform->Position.X;
-            filter.PhysicsBody->AddLinearImpulse(new FPVector2(FP.FromString("1.5") * FPMath.Sign(diff) * diff * diff, 0));
+            filter.PhysicsBody->AddLinearImpulse(new FPVector2(config.PaddleChargeForce * diff, 0));
         }
 
 
