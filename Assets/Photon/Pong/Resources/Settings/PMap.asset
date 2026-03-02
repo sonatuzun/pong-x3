@@ -60,7 +60,7 @@ MonoBehaviour:
       RawValue: 0
     BoxExtents:
       X:
-        RawValue: 3276800
+        RawValue: 4587520
       Y:
         RawValue: 655360
     CapsuleSize:
@@ -103,7 +103,7 @@ MonoBehaviour:
       RawValue: 0
     BoxExtents:
       X:
-        RawValue: 3276800
+        RawValue: 4587520
       Y:
         RawValue: 655360
     CapsuleSize:

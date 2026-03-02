@@ -807,7 +807,7 @@ MonoBehaviour:
   SourceCollider: {fileID: 0}
   Size:
     X:
-      RawValue: 6553600
+      RawValue: 9175040
     Y:
       RawValue: 1310720
   PositionOffset:
@@ -1250,7 +1250,7 @@ MonoBehaviour:
   SourceCollider: {fileID: 0}
   Size:
     X:
-      RawValue: 6553600
+      RawValue: 9175040
     Y:
       RawValue: 1310720
   PositionOffset:
