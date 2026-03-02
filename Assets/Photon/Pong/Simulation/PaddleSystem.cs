@@ -12,18 +12,24 @@ namespace Quantum.Pong
             public PhysicsBody2D* PhysicsBody;
             public Paddle* Paddle;
             public ControlFlags* ControlFlags;
-            public PlayerLink* PlayerLink;
         }
 
         public override void Update(Frame f, ref Filter filter)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
-            Input* rawInput = f.GetPlayerInput(filter.PlayerLink->PlayerRef);
 
-            //UnityEngine.Debug.Log($"{(bool) rawInput->P1_Up} {(bool) rawInput->P1_Down} {(bool)rawInput->P1_Charge} {(bool)rawInput->P2_Up} {(bool)rawInput->P2_Down} {(bool)rawInput->P2_Charge}");
-
+            PongUtils.PaddleInput input = new PongUtils.PaddleInput();
             ControlFlags* flags = filter.ControlFlags;
-            PongUtils.PaddleInput input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
+
+            if (flags->BotControlled)
+            {
+                input = PongUtils.CreateBotInput(f, filter.Transform->Position);
+            }
+            else if (f.Unsafe.TryGetPointer<PlayerLink>(filter.Entity, out var playerLink))
+            {
+                Input* rawInput = f.GetPlayerInput(playerLink->PlayerRef);
+                input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
+            }
 
             UpdatePaddleMovement(f, ref filter, input, config);
 

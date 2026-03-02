@@ -21,5 +21,37 @@ namespace Quantum.Pong
 
             return res;
         }
+
+        public static PaddleInput CreateBotInput(Frame f, FPVector2 paddlePos)
+        {
+            PaddleInput res = new PaddleInput();
+
+            foreach( EntityComponentPair<Ball> ball in f.GetComponentIterator<Ball>())
+            {
+                EntityRef ballRef = ball.Entity;
+                
+                if (f.Unsafe.TryGetPointer<Transform2D>(ballRef, out var ballTransform))
+                {
+                    FP actionTreshold = 5;
+                    FPVector2 ballPos = ballTransform->Position;
+
+                    if (ballPos.Y > paddlePos.Y + actionTreshold)
+                    {
+                        res.Up = true;
+                    }
+                    else if (ballPos.Y < paddlePos.Y - actionTreshold)
+                    {
+                        res.Down = true;
+                    }
+                    else
+                    {
+                        res.Charge = true;
+                    }
+
+                }
+            }
+
+            return res;
+        }
     }
 }
