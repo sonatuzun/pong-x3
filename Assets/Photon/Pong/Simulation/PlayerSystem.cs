@@ -35,7 +35,11 @@ namespace Quantum.Pong
                 {
                     ControlFlags flags1;
                     flags1.AcceptInputForP1 = true;
-                    flags1.AcceptInputForP2 = true;
+                    flags1.AcceptInputForP2 = false;
+
+                    ControlFlags flags2;
+                    flags2.AcceptInputForP1 = false;
+                    flags2.AcceptInputForP2 = true;
 
                     var paddle1 = SpawnPaddle(f, paddle);
                     AddPlayer(f, paddle1, player, flags1);
@@ -50,13 +54,14 @@ namespace Quantum.Pong
                     botInfo3.BotIndex = 2;
 
                     var paddle2 = SpawnPaddle(f, paddle);
-                    AddBot(f, paddle2, botInfo1);
+                    AddPlayer(f, paddle2, player, flags2);
+                    //AddBot(f, paddle2, botInfo1);
 
-                    var paddle3 = SpawnPaddle(f, paddle);
-                    AddBot(f, paddle3, botInfo2);
+                    //var paddle3 = SpawnPaddle(f, paddle);
+                    //AddBot(f, paddle3, botInfo2);
 
-                    var paddle4 = SpawnPaddle(f, paddle);
-                    AddBot(f, paddle4, botInfo3);
+                    //var paddle4 = SpawnPaddle(f, paddle);
+                    //AddBot(f, paddle4, botInfo3);
                 }
                 else
                 {
