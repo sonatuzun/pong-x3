@@ -135,6 +135,7 @@ namespace Quantum.Prototypes {
   [Quantum.Prototypes.Prototype(typeof(Quantum.Paddle))]
   public unsafe partial class PaddlePrototype : ComponentPrototype<Quantum.Paddle> {
     public FP BaseX;
+    public Int32 BallHitCount;
     partial void MaterializeUser(Frame frame, ref Quantum.Paddle result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.Paddle component = default;
@@ -143,6 +144,7 @@ namespace Quantum.Prototypes {
     }
     public void Materialize(Frame frame, ref Quantum.Paddle result, in PrototypeMaterializationContext context = default) {
         result.BaseX = this.BaseX;
+        result.BallHitCount = this.BallHitCount;
         MaterializeUser(frame, ref result, in context);
     }
   }

@@ -33,6 +33,7 @@ component PlayerLink
 component Paddle
 {
     FP BaseX;
+    Int32 BallHitCount;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]

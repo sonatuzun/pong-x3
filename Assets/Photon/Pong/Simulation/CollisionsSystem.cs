@@ -38,11 +38,11 @@ namespace Quantum.Pong
                 && f.Unsafe.TryGetPointer<PhysicsBody2D>(info.Entity, out var body)
                 && f.Unsafe.TryGetPointer<Transform2D>(info.Entity, out var transform))
             {
-                HandleBallVelocityAfterCollision(f, ball, body, transform, info);
+                HandleGameStateAfterBounce(f, ball, body, transform, info);
             }
         }
 
-        private void HandleBallVelocityAfterCollision(Frame f, Ball* ball, PhysicsBody2D* ballBody, 
+        private void HandleGameStateAfterBounce(Frame f, Ball* ball, PhysicsBody2D* ballBody, 
             Transform2D* ballTransform, ExitInfo2D info)
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
@@ -60,6 +60,7 @@ namespace Quantum.Pong
                 if (validBounce)
                 {                
                     ball->PaddleBounceCount++;
+                    paddle->BallHitCount++;
 
                     // inherit some vertical velocity from paddle
                     //ballBody->Velocity.Y = FPMath.Lerp(ballBody->Velocity.Y, paddleBody->Velocity.Y, config.VelocityTransferRate);
