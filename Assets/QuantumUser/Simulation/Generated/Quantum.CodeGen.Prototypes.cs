@@ -65,9 +65,23 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.Bot))]
+  public unsafe partial class BotPrototype : ComponentPrototype<Quantum.Bot> {
+    public Int32 BotIndex;
+    partial void MaterializeUser(Frame frame, ref Quantum.Bot result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.Bot component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.Bot result, in PrototypeMaterializationContext context = default) {
+        result.BotIndex = this.BotIndex;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.ControlFlags))]
   public unsafe partial class ControlFlagsPrototype : ComponentPrototype<Quantum.ControlFlags> {
-    public QBoolean BotControlled;
     public QBoolean AcceptInputForP1;
     public QBoolean AcceptInputForP2;
     partial void MaterializeUser(Frame frame, ref Quantum.ControlFlags result, in PrototypeMaterializationContext context);
@@ -77,7 +91,6 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.ControlFlags result, in PrototypeMaterializationContext context = default) {
-        result.BotControlled = this.BotControlled;
         result.AcceptInputForP1 = this.AcceptInputForP1;
         result.AcceptInputForP2 = this.AcceptInputForP2;
         MaterializeUser(frame, ref result, in context);

@@ -21,7 +21,7 @@ namespace Quantum.Pong
             PongUtils.PaddleInput input = new PongUtils.PaddleInput();
             ControlFlags* flags = filter.ControlFlags;
 
-            if (flags->BotControlled)
+            if (f.Unsafe.TryGetPointer<Bot>(filter.Entity, out var botInfo))
             {
                 input = PongUtils.CreateBotInput(f, filter.Entity);
             }

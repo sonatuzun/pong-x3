@@ -38,7 +38,6 @@ component Paddle
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
 component ControlFlags
 {
-    bool BotControlled;
     bool AcceptInputForP1;
     bool AcceptInputForP2;
 }
@@ -47,6 +46,12 @@ component ControlFlags
 component Ball
 {
     Int32 PaddleBounceCount;
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+component Bot
+{
+    Int32 BotIndex;
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]

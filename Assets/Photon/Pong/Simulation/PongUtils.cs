@@ -49,6 +49,7 @@ namespace Quantum.Pong
             PaddleInput res = new PaddleInput();
             Transform2D transform = f.Get<Transform2D>(entity);
             FPVector2 paddlePos = transform.Position;
+            Bot botInfo = f.Get<Bot>(entity);
 
             EntityRef? ally = FindAlly(f, entity);
             FPVector2 vectorToAlly = FPVector2.Zero;
@@ -61,7 +62,7 @@ namespace Quantum.Pong
                 vectorToAlly = allyTransform.Position - paddlePos;
 
                 isTooCloseToAlly = FPMath.Max(vectorToAlly.Y) < 15;
-                isDefender = (vectorToAlly.X * transform.Position.X) < 0;
+                isDefender = !f.Has<Bot>(ally.Value) || f.Get<Bot>(ally.Value).BotIndex > botInfo.BotIndex;
             }
 
             if (isTooCloseToAlly)

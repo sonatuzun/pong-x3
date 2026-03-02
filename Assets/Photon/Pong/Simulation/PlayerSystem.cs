@@ -1,4 +1,5 @@
 using Photon.Deterministic;
+using Photon.Deterministic.Protocol;
 using Quantum.Prototypes;
 using System;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
@@ -33,46 +34,43 @@ namespace Quantum.Pong
                 if (playerInfo->IsSingleKeyboardMultiplayer)
                 {
                     ControlFlags flags1;
-                    flags1.BotControlled = false;
                     flags1.AcceptInputForP1 = true;
-                    flags1.AcceptInputForP2 = false;
+                    flags1.AcceptInputForP2 = true;
 
-                    SpawnPaddle(f, paddle, flags1, player);
+                    var paddle1 = SpawnPaddle(f, paddle);
+                    AddPlayer(f, paddle1, player, flags1);
 
-                    ControlFlags flags2;
-                    flags2.BotControlled = true;
-                    flags2.AcceptInputForP1 = false;
-                    flags2.AcceptInputForP2 = true;
+                    Bot botInfo1;
+                    botInfo1.BotIndex = 0;
 
-                    SpawnPaddle(f, paddle, flags2, player);
+                    Bot botInfo2;
+                    botInfo2.BotIndex = 1;
 
-                    ControlFlags flags3;
-                    flags3.BotControlled = true;
-                    flags3.AcceptInputForP1 = false;
-                    flags3.AcceptInputForP2 = true;
+                    Bot botInfo3;
+                    botInfo3.BotIndex = 2;
 
-                    SpawnPaddle(f, paddle, flags3, player);
+                    var paddle2 = SpawnPaddle(f, paddle);
+                    AddBot(f, paddle2, botInfo1);
 
-                    ControlFlags flags4;
-                    flags4.BotControlled = true;
-                    flags4.AcceptInputForP1 = false;
-                    flags4.AcceptInputForP2 = true;
+                    var paddle3 = SpawnPaddle(f, paddle);
+                    AddBot(f, paddle3, botInfo2);
 
-                    SpawnPaddle(f, paddle, flags4, player);
+                    var paddle4 = SpawnPaddle(f, paddle);
+                    AddBot(f, paddle4, botInfo3);
                 }
                 else
                 {
                     ControlFlags flags;
-                    flags.BotControlled = false;
                     flags.AcceptInputForP1 = true;
                     flags.AcceptInputForP2 = true;
 
-                    SpawnPaddle(f, paddle, flags, player);
+                    var paddle1 = SpawnPaddle(f, paddle);
+                    AddPlayer(f, paddle1, player, flags);
                 }
             }
         }
 
-        public void SpawnPaddle(Frame f, AssetRef<EntityPrototype> paddleAsset, ControlFlags flags, PlayerRef? player = null)
+        public EntityRef SpawnPaddle(Frame f, AssetRef<EntityPrototype> paddleAsset)
         {
             // Create a paddle entity from the provided prototype or the default prototype from the RuntimeConfig
             EntityPrototype paddlePrototype = f.FindAsset(paddleAsset);
@@ -89,16 +87,22 @@ namespace Quantum.Pong
                 paddle->BaseX = transform->Position.X;
             }
 
-            // Set control flags for the paddle 
-            f.Set(paddleRef, flags);
 
-            // Set player link component to mark this entity as player controller
-            if (player.HasValue)
-            {
-                f.Set(paddleRef, new PlayerLink { PlayerRef = player.Value });
-            }
 
             f.Global->PaddleCount++;
+
+            return paddleRef;
+        }
+
+        public void AddPlayer(Frame f, EntityRef paddleRef, PlayerRef player, ControlFlags flags)
+        {
+            f.Set(paddleRef, new PlayerLink { PlayerRef = player });
+            f.Set(paddleRef, flags);
+        }
+
+        public void AddBot(Frame f, EntityRef paddleRef, Bot botInfo)
+        {
+            f.Set(paddleRef, botInfo);
         }
 
         /// <summary>
