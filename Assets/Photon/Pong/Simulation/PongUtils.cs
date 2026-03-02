@@ -1,6 +1,7 @@
 namespace Quantum.Pong
 {
     using Photon.Deterministic;
+    using UnityEngine;
 
     public static unsafe class PongUtils
     {
@@ -22,32 +23,76 @@ namespace Quantum.Pong
             return res;
         }
 
-        public static PaddleInput CreateBotInput(Frame f, FPVector2 paddlePos)
+        public static EntityRef? FindAlly(Frame f, EntityRef entity)
+        {
+            Transform2D transform = f.Get<Transform2D>(entity);
+
+            foreach (EntityComponentPair<Paddle> other in f.GetComponentIterator<Paddle>())
+            {
+                if (other.Entity == entity)
+                    continue;
+
+                Transform2D otherTransform = f.Get<Transform2D>(other.Entity);
+                bool isAlly = (otherTransform.Position.X * transform.Position.X) > 0; // on the same side
+
+                if (!isAlly)
+                    continue;
+
+                return other.Entity;
+            }
+
+            return null;
+        }
+
+        public static PaddleInput CreateBotInput(Frame f, EntityRef entity)
         {
             PaddleInput res = new PaddleInput();
+            Transform2D transform = f.Get<Transform2D>(entity);
+            FPVector2 paddlePos = transform.Position;
 
-            foreach( EntityComponentPair<Ball> ball in f.GetComponentIterator<Ball>())
+            EntityRef? ally = FindAlly(f, entity);
+            FPVector2 vectorToAlly = FPVector2.Zero;
+            bool isTooCloseToAlly = false;
+            bool isDefender = false;
+
+            if (ally.HasValue)
             {
-                EntityRef ballRef = ball.Entity;
-                
-                if (f.Unsafe.TryGetPointer<Transform2D>(ballRef, out var ballTransform))
+                Transform2D allyTransform = f.Get<Transform2D>(ally.Value);
+                vectorToAlly = allyTransform.Position - paddlePos;
+
+                isTooCloseToAlly = FPMath.Max(vectorToAlly.Y) < 15;
+                isDefender = (vectorToAlly.X * transform.Position.X) < 0;
+            }
+
+            if (isTooCloseToAlly)
+            {
+                res.Charge = isDefender;
+            }
+
+            // target on the first ball even if multiple balls are active
+            foreach (var pair in f.GetComponentIterator<Ball>())
+            {
+                Transform2D ballTransform = f.Get<Transform2D>(pair.Entity);
+
+                FP actionTreshold = 5;
+                FPVector2 ballPos = ballTransform.Position;
+
+                if (isDefender)
                 {
-                    FP actionTreshold = 5;
-                    FPVector2 ballPos = ballTransform->Position;
+                    ballPos.Y *= -1;
+                }
 
-                    if (ballPos.Y > paddlePos.Y + actionTreshold)
-                    {
-                        res.Up = true;
-                    }
-                    else if (ballPos.Y < paddlePos.Y - actionTreshold)
-                    {
-                        res.Down = true;
-                    }
-                    else
-                    {
-                        res.Charge = true;
-                    }
-
+                if (ballPos.Y > paddlePos.Y + actionTreshold)
+                {
+                    res.Up = true;
+                }
+                else if (ballPos.Y < paddlePos.Y - actionTreshold)
+                {
+                    res.Down = true;
+                }
+                else if (!isDefender)
+                {
+                    res.Charge = true;
                 }
             }
 

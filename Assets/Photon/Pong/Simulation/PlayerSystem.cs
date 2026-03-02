@@ -47,20 +47,18 @@ namespace Quantum.Pong
                     SpawnPaddle(f, paddle, flags2, player);
 
                     ControlFlags flags3;
-                    flags3.BotControlled = false;
+                    flags3.BotControlled = true;
                     flags3.AcceptInputForP1 = false;
                     flags3.AcceptInputForP2 = true;
 
                     SpawnPaddle(f, paddle, flags3, player);
 
-                    /*
                     ControlFlags flags4;
                     flags4.BotControlled = true;
                     flags4.AcceptInputForP1 = false;
                     flags4.AcceptInputForP2 = true;
 
                     SpawnPaddle(f, paddle, flags4, player);
-                    */
                 }
                 else
                 {

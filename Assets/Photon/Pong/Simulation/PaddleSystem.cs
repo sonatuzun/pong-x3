@@ -23,7 +23,7 @@ namespace Quantum.Pong
 
             if (flags->BotControlled)
             {
-                input = PongUtils.CreateBotInput(f, filter.Transform->Position);
+                input = PongUtils.CreateBotInput(f, filter.Entity);
             }
             else if (f.Unsafe.TryGetPointer<PlayerLink>(filter.Entity, out var playerLink))
             {
