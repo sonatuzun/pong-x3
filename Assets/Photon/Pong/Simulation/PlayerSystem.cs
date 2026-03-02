@@ -54,8 +54,8 @@ namespace Quantum.Pong
                     botInfo3.BotIndex = 2;
 
                     var paddle2 = SpawnPaddle(f, paddle);
-                    AddPlayer(f, paddle2, player, flags2);
-                    //AddBot(f, paddle2, botInfo1);
+                    //AddPlayer(f, paddle2, player, flags2);
+                    AddBot(f, paddle2, botInfo1);
 
                     //var paddle3 = SpawnPaddle(f, paddle);
                     //AddBot(f, paddle3, botInfo2);
