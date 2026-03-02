@@ -19,6 +19,12 @@ namespace Quantum.Pong
                     f.Global->Team1Score++;
                 }
 
+                PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
+                if (f.Global->Team1Score >= config.ScoreLimit 
+                    || f.Global->Team2Score >= config.ScoreLimit)
+                {
+                    f.Global->GameOver = true;
+                }
             }
         }
 

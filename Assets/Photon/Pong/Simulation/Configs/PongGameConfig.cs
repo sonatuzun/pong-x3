@@ -5,6 +5,9 @@ namespace Quantum.Pong
 
     public class PongGameConfig : AssetObject
     {
+        [Header("Game Configuration")]
+        public FP ScoreLimit = 3;
+
         [Header("Paddle Configuration")]
         [Tooltip("Base speed for the paddle")]
         public FP PaddleBaseSpeed;

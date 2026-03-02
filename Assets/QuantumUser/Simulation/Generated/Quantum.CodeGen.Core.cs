@@ -580,8 +580,10 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 1064;
+    public const Int32 SIZE = 1072;
     public const Int32 ALIGNMENT = 8;
+    [FieldOffset(1068)]
+    private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
     [FieldOffset(8)]
@@ -613,6 +615,8 @@ namespace Quantum {
     public Int32 Team1Score;
     [FieldOffset(1060)]
     public Int32 Team2Score;
+    [FieldOffset(1064)]
+    public QBoolean GameOver;
     [FieldOffset(1052)]
     public Int32 PaddleCount;
     public readonly FixedArray<Input> input {
@@ -638,6 +642,7 @@ namespace Quantum {
         hash = hash * 31 + BallCount.GetHashCode();
         hash = hash * 31 + Team1Score.GetHashCode();
         hash = hash * 31 + Team2Score.GetHashCode();
+        hash = hash * 31 + GameOver.GetHashCode();
         hash = hash * 31 + PaddleCount.GetHashCode();
         return hash;
       }
@@ -660,6 +665,7 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->PaddleCount);
         serializer.Stream.Serialize(&p->Team1Score);
         serializer.Stream.Serialize(&p->Team2Score);
+        QBoolean.Serialize(&p->GameOver, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]

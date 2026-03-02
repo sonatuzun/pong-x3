@@ -16,6 +16,7 @@ namespace Quantum.Asteroids
     {
         public Text team1ScoreText;
         public Text team2ScoreText;
+        public Text gameResultText;
 
         /// <summary>
         /// The camera to enable when Quantum is in QUANTUM_XY mode.
@@ -46,8 +47,14 @@ namespace Quantum.Asteroids
         /// </summary>
         public override void OnUpdateView()
         {
-            team1ScoreText.text = $"{VerifiedFrame.Global->Team1Score}";
-            team2ScoreText.text = $"{VerifiedFrame.Global->Team2Score}";
+            int team1Score = VerifiedFrame.Global->Team1Score;
+            int team2Score = VerifiedFrame.Global->Team2Score;
+
+            team1ScoreText.text = $"{team1Score}";
+            team2ScoreText.text = $"{team2Score}";
+
+            gameResultText.enabled = VerifiedFrame.Global->GameOver;
+            gameResultText.text = (team1Score > team2Score) ? "Team 1 Won" : "Team 2 Won";
 
             /*
             if (ScoreBoard != null)
