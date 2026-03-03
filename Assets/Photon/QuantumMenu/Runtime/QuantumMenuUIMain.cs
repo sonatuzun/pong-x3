@@ -9,6 +9,7 @@ namespace Quantum.Menu
   using InputField = UnityEngine.UI.InputField;
 #endif
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// The main menu.
@@ -235,31 +236,15 @@ namespace Quantum.Menu
         }
 
         // copy some logic from other buttons
-        protected virtual async void OnLocalMultiplayerButtonPressed()
+        protected virtual void OnLocalMultiplayerButtonPressed()
         {
-            ConnectionArgs.Session = null;
-            ConnectionArgs.Creating = false;
-            ConnectionArgs.Region = ConnectionArgs.PreferredRegion;
-
-            Controller.Show<QuantumMenuUILoading>();
-
-            var result = await Connection.ConnectAsync(ConnectionArgs);
-
-            await Controller.HandleConnectionResult(result, this.Controller);
+            SceneManager.LoadScene(1);
         }
 
         // also switch to the local scene and play the game I believe in you, you can do it!!
-        protected virtual async void OnSinglePlayerButtonPressed()
+        protected virtual void OnSinglePlayerButtonPressed()
         {
-            ConnectionArgs.Session = null;
-            ConnectionArgs.Creating = false;
-            ConnectionArgs.Region = ConnectionArgs.PreferredRegion;
-
-            Controller.Show<QuantumMenuUILoading>();
-
-            var result = await Connection.ConnectAsync(ConnectionArgs);
-
-            await Controller.HandleConnectionResult(result, this.Controller);
+            SceneManager.LoadScene(1);
         }
 
         /// <summary>
