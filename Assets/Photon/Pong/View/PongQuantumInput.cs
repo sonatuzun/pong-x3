@@ -1,4 +1,4 @@
-namespace Quantum.Asteroids
+namespace Quantum.Pong
 {
     using Photon.Deterministic;
     using UnityEngine;

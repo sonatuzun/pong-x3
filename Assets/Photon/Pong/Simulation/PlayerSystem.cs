@@ -29,49 +29,37 @@ namespace Quantum.Pong
             AssetRef<EntityPrototype> paddle = f.RuntimeConfig.DefaultPaddle;
             EntityRef playerRef = f.Create(playerPrototype);
 
-            if (f.Unsafe.TryGetPointer<PlayerInfo>(playerRef, out var playerInfo))
+            ControlFlags flags1;
+            flags1.AcceptInputForP1 = true;
+            flags1.AcceptInputForP2 = f.RuntimeConfig.LocalPlayerCount <= 1;
+
+            var paddle1 = SpawnPaddle(f, paddle);
+            AddPlayer(f, paddle1, player, flags1);
+
+            if (f.RuntimeConfig.BotCount > 0)
             {
-                if (playerInfo->IsSingleKeyboardMultiplayer)
-                {
-                    ControlFlags flags1;
-                    flags1.AcceptInputForP1 = true;
-                    flags1.AcceptInputForP2 = false;
+                Bot botInfo;
+                botInfo.BotIndex = 1;
+                var botPaddle = SpawnPaddle(f, paddle);
+                AddBot(f, botPaddle, botInfo);
+            }
 
-                    ControlFlags flags2;
-                    flags2.AcceptInputForP1 = false;
-                    flags2.AcceptInputForP2 = true;
+            if (f.RuntimeConfig.LocalPlayerCount > 1)
+            {
+                ControlFlags flags2;
+                flags1.AcceptInputForP1 = false;
+                flags1.AcceptInputForP2 = true;
 
-                    var paddle1 = SpawnPaddle(f, paddle);
-                    AddPlayer(f, paddle1, player, flags1);
+                var paddle2 = SpawnPaddle(f, paddle);
+                AddPlayer(f, paddle1, player, flags1);
+            }
 
-                    Bot botInfo1;
-                    botInfo1.BotIndex = 0;
-
-                    Bot botInfo2;
-                    botInfo2.BotIndex = 1;
-
-                    Bot botInfo3;
-                    botInfo3.BotIndex = 2;
-
-                    var paddle2 = SpawnPaddle(f, paddle);
-                    //AddPlayer(f, paddle2, player, flags2);
-                    AddBot(f, paddle2, botInfo1);
-
-                    //var paddle3 = SpawnPaddle(f, paddle);
-                    //AddBot(f, paddle3, botInfo2);
-
-                    //var paddle4 = SpawnPaddle(f, paddle);
-                    //AddBot(f, paddle4, botInfo3);
-                }
-                else
-                {
-                    ControlFlags flags;
-                    flags.AcceptInputForP1 = true;
-                    flags.AcceptInputForP2 = true;
-
-                    var paddle1 = SpawnPaddle(f, paddle);
-                    AddPlayer(f, paddle1, player, flags);
-                }
+            if (f.RuntimeConfig.BotCount > 1)
+            {
+                Bot botInfo;
+                botInfo.BotIndex = 1;
+                var botPaddle = SpawnPaddle(f, paddle);
+                AddBot(f, botPaddle, botInfo);
             }
         }
 

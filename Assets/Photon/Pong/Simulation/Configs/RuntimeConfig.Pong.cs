@@ -1,3 +1,5 @@
+using System;
+
 namespace Quantum
 {
   /// <summary>
@@ -12,5 +14,9 @@ namespace Quantum
 
     public AssetRef<EntityPrototype> DefaultPlayerInfo;
     public AssetRef<EntityPrototype> DefaultPaddle;
+
+    public bool IsLocalGame = false;
+    public Int32 BotCount = 0;
+    public Int32 LocalPlayerCount = 1;
   }
 }
