@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LeaderboardController : MonoBehaviour
 {
+    public UnityEngine.UI.Button backButton;
+
     // get data from a file
     // get entries object 
     // populate popup
@@ -11,12 +13,12 @@ public class LeaderboardController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        backButton.onClick.AddListener(OnBackButtonPressed);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnBackButtonPressed()
     {
-        
+        var transform = GetComponent<Transform>();
+        Destroy(transform.gameObject);
     }
 }
