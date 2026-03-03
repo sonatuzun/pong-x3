@@ -34,7 +34,11 @@ namespace Quantum.Pong
                 && f.Unsafe.TryGetPointer<Ball>(info.Other, out var ball))
             {
                 f.Destroy(info.Other);
-                f.Signals.SpawnNewBall();
+
+                if (!f.Global->GameOver)
+                {
+                    f.Signals.SpawnNewBall();
+                }
             }
         }
 

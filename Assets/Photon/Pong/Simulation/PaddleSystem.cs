@@ -18,6 +18,11 @@ namespace Quantum.Pong
         {
             PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
 
+            if (f.Global->GameOver)
+            {
+                return;
+            }
+
             PongUtils.PaddleInput input = new PongUtils.PaddleInput();
             ControlFlags* flags = filter.ControlFlags;
 
