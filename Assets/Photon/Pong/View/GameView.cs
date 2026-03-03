@@ -89,12 +89,13 @@ namespace Quantum.Asteroids
 
         private void OnRestartButtonClicked()
         {
+            // this doesn't work I also need to reset the game state
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void OnBackToMenuButtonClicked()
         {
-
+            SceneManager.LoadScene(0);
         }
 
         private void OnLeaderboardButtonClicked()
