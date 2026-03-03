@@ -39,7 +39,7 @@ namespace Quantum.Pong
             if (f.RuntimeConfig.BotCount > 0)
             {
                 Bot botInfo;
-                botInfo.BotIndex = 1;
+                botInfo.BotIndex = 0;
                 var botPaddle = SpawnPaddle(f, paddle);
                 AddBot(f, botPaddle, botInfo);
             }

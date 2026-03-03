@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class SimulationSetup : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
     private void Awake()
     {
@@ -15,10 +11,7 @@ public class SimulationSetup : MonoBehaviour
         debugRunner.RuntimeConfig.IsLocalGame = true;
         debugRunner.RuntimeConfig.BotCount = 2;
         debugRunner.RuntimeConfig.LocalPlayerCount = 2;
-
     }
-
-
 
     // Update is called once per frame
     void Update()
