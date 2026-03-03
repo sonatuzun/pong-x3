@@ -1,7 +1,5 @@
 namespace Quantum.Asteroids
 {
-    using Photon.Deterministic.Protocol;
-    using Photon.Deterministic;
     using Quantum;
     using UnityEngine;
     using UnityEngine.SceneManagement;
@@ -17,6 +15,8 @@ namespace Quantum.Asteroids
     /// </summary>
     public unsafe class GameView : QuantumSceneViewComponent
     {
+        public GameObject leaderboardPrefab;
+
         public Text team1ScoreText;
         public Text team2ScoreText;
         public Text gameResultText;
@@ -111,7 +111,7 @@ namespace Quantum.Asteroids
 
         private void OnLeaderboardButtonClicked()
         {
-
+            var leaderboard = Instantiate(leaderboardPrefab);
         }
     }
 }
