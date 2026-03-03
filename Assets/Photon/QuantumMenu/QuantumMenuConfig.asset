@@ -37,9 +37,15 @@ MonoBehaviour:
       GameConfig:
         Id:
           Value: 490772527466783251
-      DefaultPlayerAvatar:
+      DefaultPlayerInfo:
+        Id:
+          Value: 1499231635423291313
+      DefaultPaddle:
         Id:
           Value: 1444795628173048101
+      IsLocalGame: 0
+      BotCount: 0
+      LocalPlayerCount: 1
       Seed: 0
       Map:
         Id:

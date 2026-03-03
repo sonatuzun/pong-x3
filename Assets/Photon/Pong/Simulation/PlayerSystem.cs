@@ -25,6 +25,7 @@ namespace Quantum.Pong
         public void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime)
         {
             RuntimePlayer data = f.GetPlayerData(player);
+
             AssetRef<EntityPrototype> playerPrototype = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerInfo;
             AssetRef<EntityPrototype> paddlePrototype = f.RuntimeConfig.DefaultPaddle;
             EntityRef playerRef = f.Create(playerPrototype);
