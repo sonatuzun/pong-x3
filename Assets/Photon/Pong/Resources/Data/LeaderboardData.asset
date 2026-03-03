@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f28046ece247274b93f95e8f92d8fdd, type: 3}
+  m_Name: LeaderboardData
+  m_EditorClassIdentifier: Assembly-CSharp::LeaderboardData
+  playerDatas:
+  - username: Daphne
+    favoriteAnimal: Fox
+  - username: Benedict
+    favoriteAnimal: Penguin
+  - username: Simon
+    favoriteAnimal: Puma
+  - username: Anthony
+    favoriteAnimal: Chamelion
+  - username: Colin
+    favoriteAnimal: Rat
+  - username: Elois
+    favoriteAnimal: Rabbit
+  - username: Kate
+    favoriteAnimal: Tiger
+  - username: Cameron
+    favoriteAnimal: Cat
+  - username: Candle
+    favoriteAnimal: Parrot
+  - username: Wilson
+    favoriteAnimal: Dog
+  - username: Logan
+    favoriteAnimal: Bear
+  - username: Cuddy
+    favoriteAnimal: Racoon
+  - username: Greg
+    favoriteAnimal: Hamster
+  - username: Chase
+    favoriteAnimal: Zebra
+  - username: Connor
+    favoriteAnimal: Horse
+  - username: Stacy
+    favoriteAnimal: Crocodile
+  - username: Lucas
+    favoriteAnimal: Stork
+  - username: Forman
+    favoriteAnimal: Koala
+  - username: Tom
+    favoriteAnimal: Giraffe
+  - username: Joestar
+    favoriteAnimal: Wolf
+  - username: Carl
+    favoriteAnimal: Dog
+  - username: Dio
+    favoriteAnimal: Cheetah
+  - username: Sidney
+    favoriteAnimal: Lion
+  - username: Edmund
+    favoriteAnimal: Kangaroo
+  - username: Clair
+    favoriteAnimal: Dove
+  - username: Justin
+    favoriteAnimal: Monkey
+  - username: Nataleee
+    favoriteAnimal: Fish
+  - username: Kenedy
+    favoriteAnimal: Goril
+  - username: Luca
+    favoriteAnimal: Pelican
+  - username: Gianluca
+    favoriteAnimal: Narwhal

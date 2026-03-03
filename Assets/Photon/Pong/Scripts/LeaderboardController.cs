@@ -9,7 +9,6 @@ public class LeaderboardController : MonoBehaviour
     // populate popup
     // be able to close the popup
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
