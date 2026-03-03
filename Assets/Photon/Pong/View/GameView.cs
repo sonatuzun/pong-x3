@@ -2,6 +2,7 @@ namespace Quantum.Asteroids
 {
     using Quantum;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 #if QUANTUM_ENABLE_TEXTMESHPRO
     using Text = TMPro.TextMeshProUGUI;
 #else
@@ -63,9 +64,10 @@ namespace Quantum.Asteroids
 
             bool isGameOver = VerifiedFrame.Global->GameOver;
 
-            restartButton.enabled = isGameOver;
-            backToMenuButton.enabled = isGameOver;
-            leaderboardButton.enabled = isGameOver;
+            /// TODO make this nicer
+            restartButton.gameObject.SetActive(isGameOver);
+            backToMenuButton.gameObject.SetActive(isGameOver);
+            leaderboardButton.gameObject.SetActive(isGameOver);
 
             gameResultText.enabled = isGameOver;
 
@@ -87,7 +89,7 @@ namespace Quantum.Asteroids
 
         private void OnRestartButtonClicked()
         {
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void OnBackToMenuButtonClicked()
