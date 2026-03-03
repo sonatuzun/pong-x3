@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PongGameSetup : MonoBehaviour
 {
-
     private void Awake()
     {
         var debugRunner = GetComponent<QuantumRunnerLocalDebug>();
@@ -13,11 +12,5 @@ public class PongGameSetup : MonoBehaviour
 
         debugRunner.RuntimeConfig.BotCount = PlayerPrefs.GetInt("BotCount");
         debugRunner.RuntimeConfig.LocalPlayerCount = PlayerPrefs.GetInt("LocalPlayerCount"); ;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
