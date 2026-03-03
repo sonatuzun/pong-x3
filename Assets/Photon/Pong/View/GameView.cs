@@ -12,11 +12,15 @@ namespace Quantum.Asteroids
     /// The AsteroidsGameView class is responsible for updating the game's UI elements
     /// such as the level text and scoreboard.
     /// </summary>
-    public unsafe class AsteroidsGameView : QuantumSceneViewComponent
+    public unsafe class GameView : QuantumSceneViewComponent
     {
         public Text team1ScoreText;
         public Text team2ScoreText;
         public Text gameResultText;
+
+        public UnityEngine.UI.Button restartButton;
+        public UnityEngine.UI.Button backToMenuButton;
+        public UnityEngine.UI.Button leaderboardButton;
 
         /// <summary>
         /// The camera to enable when Quantum is in QUANTUM_XY mode.
@@ -40,6 +44,10 @@ namespace Quantum.Asteroids
       Camera2D.gameObject.SetActive(false);
       Camera3D.gameObject.SetActive(true);
 #endif
+            restartButton.onClick.AddListener(OnRestartButtonClicked);
+            backToMenuButton.onClick.AddListener(OnBackToMenuButtonClicked);
+            leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
+
         }
 
         /// <summary>
@@ -53,7 +61,14 @@ namespace Quantum.Asteroids
             team1ScoreText.text = $"{team1Score}";
             team2ScoreText.text = $"{team2Score}";
 
-            gameResultText.enabled = VerifiedFrame.Global->GameOver;
+            bool isGameOver = VerifiedFrame.Global->GameOver;
+
+            restartButton.enabled = isGameOver;
+            backToMenuButton.enabled = isGameOver;
+            leaderboardButton.enabled = isGameOver;
+
+            gameResultText.enabled = isGameOver;
+
             gameResultText.text = (team1Score > team2Score) ? "Team 1 Won" : "Team 2 Won";
 
             /*
@@ -68,6 +83,21 @@ namespace Quantum.Asteroids
                 }
             }
             */
+        }
+
+        private void OnRestartButtonClicked()
+        {
+
+        }
+
+        private void OnBackToMenuButtonClicked()
+        {
+
+        }
+
+        private void OnLeaderboardButtonClicked()
+        {
+
         }
     }
 }
