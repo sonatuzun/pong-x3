@@ -16,6 +16,8 @@ MonoBehaviour:
     Path: Photon/Pong/Resources/Settings/PongGameConfig
     Guid:
       Value: 490772527466783251
+  ScoreLimit:
+    RawValue: 65536
   PaddleBaseSpeed:
     RawValue: 2621440
   PaddleBaseSize:

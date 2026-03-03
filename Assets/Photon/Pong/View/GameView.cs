@@ -1,5 +1,7 @@
 namespace Quantum.Asteroids
 {
+    using Photon.Deterministic.Protocol;
+    using Photon.Deterministic;
     using Quantum;
     using UnityEngine;
     using UnityEngine.SceneManagement;
@@ -64,7 +66,7 @@ namespace Quantum.Asteroids
 
             bool isGameOver = VerifiedFrame.Global->GameOver;
 
-            /// TODO make this nicer
+            /// TODO make this nicer and hide restart button for multiplayer
             restartButton.gameObject.SetActive(isGameOver);
             backToMenuButton.gameObject.SetActive(isGameOver);
             leaderboardButton.gameObject.SetActive(isGameOver);
@@ -89,12 +91,21 @@ namespace Quantum.Asteroids
 
         private void OnRestartButtonClicked()
         {
-            // this doesn't work I also need to reset the game state
+            QuantumRunner.Default?.Shutdown();
+
+
+            //QuantumRunner.StartGame(new SessionRunner.Arguments {});
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            /*
+            // this doesn't work I also need to reset the game state
+            
+            */
         }
 
         private void OnBackToMenuButtonClicked()
         {
+            QuantumRunner.Default?.Shutdown();
             SceneManager.LoadScene(0);
         }
 

@@ -67,7 +67,8 @@ namespace Quantum.Menu {
     }
 
     /// <summary>
-    /// Is called when the <see cref="_disconnectButton"/> is pressed using SendMessage() from the UI object.
+    /// Is called when the <see cref="_disconnectButton"/> is pressed using 
+    /// ) from the UI object.
     /// </summary>
     protected virtual async void OnDisconnectPressed() {
       await Connection.DisconnectAsync(ConnectFailReason.UserRequest);
