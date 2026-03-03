@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 8920030153649119860}
   - component: {fileID: 6891612589569558262}
   - component: {fileID: 2523436912492727894}
+  - component: {fileID: 7995973489074332834}
   m_Layer: 5
   m_Name: ScoreItem
   m_TagString: Untagged
@@ -460,6 +461,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7995973489074332834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793467280908442922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae767b563874c240b2146356c26ca97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  _rankText: {fileID: 3196463812162799873}
+  _nameText: {fileID: 1889034051938516890}
+  _scoreText: {fileID: 4048088776638373833}
 --- !u!1 &6895361184391188757
 GameObject:
   m_ObjectHideFlags: 0

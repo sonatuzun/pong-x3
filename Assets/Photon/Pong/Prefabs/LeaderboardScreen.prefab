@@ -345,10 +345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88b341c23630554a9f4766422883eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeaderboardController
-  scoreItemPrefab: {fileID: 6793467280908442922, guid: 26e474801810cc249a927c8ca8505bb5, type: 3}
-  leaderboardData: {fileID: 11400000, guid: 9aa5f7ba0a40b814398f32716c3333ec, type: 2}
-  entryHolder: {fileID: 5190890477429504669}
-  backButton: {fileID: 1614422929749761307}
+  _scoreItemPrefab: {fileID: 6793467280908442922, guid: 26e474801810cc249a927c8ca8505bb5, type: 3}
+  _leaderboardData: {fileID: 11400000, guid: 9aa5f7ba0a40b814398f32716c3333ec, type: 2}
+  _entryHolder: {fileID: 5190890477429504669}
+  _backButton: {fileID: 1614422929749761307}
 --- !u!1 &6139284096647833233
 GameObject:
   m_ObjectHideFlags: 0

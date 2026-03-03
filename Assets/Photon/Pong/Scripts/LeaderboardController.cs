@@ -3,16 +3,16 @@ using UnityEngine;
 public class LeaderboardController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject scoreItemPrefab;
+    private GameObject _scoreItemPrefab;
 
     [SerializeField]
-    private LeaderboardData leaderboardData;
+    private LeaderboardData _leaderboardData;
 
     [SerializeField]
-    private Transform entryHolder;
+    private Transform _entryHolder;
 
     [SerializeField]
-    private UnityEngine.UI.Button backButton;
+    private UnityEngine.UI.Button _backButton;
 
     // get data from a file
     // get entries object 
@@ -22,7 +22,7 @@ public class LeaderboardController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        backButton.onClick.AddListener(OnBackButtonPressed);
+        _backButton.onClick.AddListener(OnBackButtonPressed);
 
         var leaderboardData = LetsPretendWeAreGettingLeaderboardDataOnline();
         FillLeaderboard(leaderboardData);
@@ -30,7 +30,7 @@ public class LeaderboardController : MonoBehaviour
 
     private LeaderboardData LetsPretendWeAreGettingLeaderboardDataOnline()
     {
-        return leaderboardData;
+        return _leaderboardData;
     }
 
     private void FillLeaderboard(LeaderboardData leaderboardData)
@@ -39,8 +39,13 @@ public class LeaderboardController : MonoBehaviour
 
         for (int i = 0; i < playerDatas.Length; i++)
         {
-            var scoreItem = Instantiate(scoreItemPrefab);
-            scoreItem.transform.SetParent(entryHolder);
+            var scoreItem = Instantiate(_scoreItemPrefab);
+            scoreItem.transform.SetParent(_entryHolder);
+
+            var rank = i + 1;
+            var playerData = playerDatas[i];
+            var itemController = scoreItem.GetComponent<ScoreItemController>();
+            itemController.SetPlayerData(rank, playerData);
         }
     }
 
