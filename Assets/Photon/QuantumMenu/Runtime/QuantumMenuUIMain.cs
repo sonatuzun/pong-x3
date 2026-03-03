@@ -238,12 +238,18 @@ namespace Quantum.Menu
         // copy some logic from other buttons
         protected virtual void OnLocalMultiplayerButtonPressed()
         {
+            PlayerPrefs.SetInt("LocalPlayerCount", 2);
+            PlayerPrefs.SetInt("BotCount", 0);
+            PlayerPrefs.SetInt("IsLocalGame", 1);
             SceneManager.LoadScene(1);
         }
 
         // also switch to the local scene and play the game I believe in you, you can do it!!
         protected virtual void OnSinglePlayerButtonPressed()
         {
+            PlayerPrefs.SetInt("LocalPlayerCount", 1);
+            PlayerPrefs.SetInt("BotCount", 1);
+            PlayerPrefs.SetInt("IsLocalGame", 1);
             SceneManager.LoadScene(1);
         }
 

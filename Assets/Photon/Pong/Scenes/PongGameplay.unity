@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703703404}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba1cef2e59fba6443b0b8a032263be28, type: 3}
   m_Name: 
@@ -3102,6 +3102,9 @@ MonoBehaviour:
     DefaultPaddle:
       Id:
         Value: 1444795628173048101
+    IsLocalGame: 0
+    BotCount: 0
+    LocalPlayerCount: 1
     Seed: 0
     Map:
       Id:

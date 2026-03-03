@@ -26,39 +26,41 @@ namespace Quantum.Pong
         {
             RuntimePlayer data = f.GetPlayerData(player);
             AssetRef<EntityPrototype> playerPrototype = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerInfo;
-            AssetRef<EntityPrototype> paddle = f.RuntimeConfig.DefaultPaddle;
+            AssetRef<EntityPrototype> paddlePrototype = f.RuntimeConfig.DefaultPaddle;
             EntityRef playerRef = f.Create(playerPrototype);
 
-            ControlFlags flags1;
-            flags1.AcceptInputForP1 = true;
-            flags1.AcceptInputForP2 = f.RuntimeConfig.LocalPlayerCount <= 1;
+            {
+                ControlFlags flags;
+                flags.AcceptInputForP1 = true;
+                flags.AcceptInputForP2 = f.RuntimeConfig.LocalPlayerCount <= 1;
 
-            var paddle1 = SpawnPaddle(f, paddle);
-            AddPlayer(f, paddle1, player, flags1);
+                var paddle = SpawnPaddle(f, paddlePrototype);
+                AddPlayer(f, paddle, player, flags);
+            }
 
             if (f.RuntimeConfig.BotCount > 0)
             {
                 Bot botInfo;
                 botInfo.BotIndex = 0;
-                var botPaddle = SpawnPaddle(f, paddle);
+                var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBot(f, botPaddle, botInfo);
             }
 
             if (f.RuntimeConfig.LocalPlayerCount > 1)
             {
-                ControlFlags flags2;
-                flags1.AcceptInputForP1 = false;
-                flags1.AcceptInputForP2 = true;
+                ControlFlags flags;
+                flags.AcceptInputForP1 = false;
+                flags.AcceptInputForP2 = true;
 
-                var paddle2 = SpawnPaddle(f, paddle);
-                AddPlayer(f, paddle1, player, flags1);
+                var paddle = SpawnPaddle(f, paddlePrototype);
+                AddPlayer(f, paddle, player, flags);
             }
 
             if (f.RuntimeConfig.BotCount > 1)
             {
                 Bot botInfo;
                 botInfo.BotIndex = 1;
-                var botPaddle = SpawnPaddle(f, paddle);
+                var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBot(f, botPaddle, botInfo);
             }
         }
