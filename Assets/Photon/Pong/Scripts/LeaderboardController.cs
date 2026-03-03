@@ -9,7 +9,7 @@ public class LeaderboardController : MonoBehaviour
     private LeaderboardData _leaderboardData;
 
     [SerializeField]
-    private Transform _entryHolder;
+    private RectTransform _entryHolder;
 
     [SerializeField]
     private UnityEngine.UI.Button _backButton;
