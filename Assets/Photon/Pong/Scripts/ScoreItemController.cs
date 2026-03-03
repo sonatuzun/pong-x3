@@ -13,6 +13,9 @@ public class ScoreItemController : MonoBehaviour
     [SerializeField]
     private Text _scoreText;
 
+    [SerializeField]
+    private GameObject _userInfoPopupPrefab;
+
     private LeaderboardPlayerData _playerData;
 
     public void SetPlayerData(int rank, LeaderboardPlayerData playerData)
@@ -24,5 +27,12 @@ public class ScoreItemController : MonoBehaviour
 
         // dummy score calculation
         _scoreText.text = $"{1000000 - rank * 1000}";
+    }
+
+    public void OnClicked()
+    {
+        var userInfoPopup = Instantiate(_userInfoPopupPrefab);
+        var popupController = userInfoPopup.GetComponent<UserInfoPopupController>();
+        popupController.SetUserData(_playerData);
     }
 }
