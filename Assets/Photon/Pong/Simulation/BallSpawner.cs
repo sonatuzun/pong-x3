@@ -3,16 +3,18 @@ using Photon.Deterministic;
 namespace Quantum.Pong
 {
 
-    public unsafe class BallSpawner : SystemSignalsOnly, ISignalSpawnNewBall
+    public unsafe class BallSpawner : SystemSignalsOnly, ISignalTrySpawnFirstBall, ISignalSpawnNewBall
     {
-        public override void OnInit(Frame f)
+        public void TrySpawnFirstBall(Frame f)
         {
-            SpawnBall(f);
+            if (f.Global->PaddleCount >= 2)
+            {
+                SpawnBall(f);
+            }
         }
 
         public void SpawnNewBall(Frame f)
         {
-            PongGameConfig config = f.FindAsset(f.RuntimeConfig.GameConfig);
             SpawnBall(f);
         }
 

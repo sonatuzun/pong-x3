@@ -35,12 +35,24 @@ namespace Quantum.Pong
                 AddPlayerToPaddle(f, paddle, player, flags);
             }
 
+            if (f.RuntimeConfig.IsLocalGame)
+            {
+                SetUpLocalPaddlesAndBots(f, player, paddlePrototype);
+            }
+
+            f.Signals.TrySpawnFirstBall();
+        }
+
+        private void SetUpLocalPaddlesAndBots(Frame f, PlayerRef player, AssetRef<EntityPrototype> paddlePrototype)
+        {
             if (f.RuntimeConfig.BotCount > 0)
             {
                 BotInfo botInfo;
-                botInfo.BotIndex = 0;
+                botInfo.BotIndex = f.Global->BotCount;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBotToPaddle(f, botPaddle, botInfo);
+                
+                f.Global->BotCount++;
             }
 
             if (f.RuntimeConfig.LocalPlayerCount > 1)
@@ -56,9 +68,11 @@ namespace Quantum.Pong
             if (f.RuntimeConfig.BotCount > 1)
             {
                 BotInfo botInfo;
-                botInfo.BotIndex = 1;
+                botInfo.BotIndex = f.Global->BotCount;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBotToPaddle(f, botPaddle, botInfo);
+
+                f.Global->BotCount++;
             }
         }
 
@@ -106,6 +120,7 @@ namespace Quantum.Pong
             {
                 if (pair.Component.PlayerRef == player)
                 {
+                    // a simple bot replacement logic can be implemented here
                     f.Destroy(pair.Entity);
                 }
             }

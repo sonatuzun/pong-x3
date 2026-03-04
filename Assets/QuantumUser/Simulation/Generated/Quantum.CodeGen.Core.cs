@@ -608,8 +608,6 @@ namespace Quantum {
   public unsafe partial struct _globals_ {
     public const Int32 SIZE = 1072;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(1068)]
-    private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
     [FieldOffset(8)]
@@ -637,14 +635,16 @@ namespace Quantum {
     public BitSet6 PlayerLastConnectionState;
     [FieldOffset(1048)]
     public Int32 BallCount;
-    [FieldOffset(1056)]
-    public Int32 Team1Score;
     [FieldOffset(1060)]
-    public Int32 Team2Score;
+    public Int32 Team1Score;
     [FieldOffset(1064)]
+    public Int32 Team2Score;
+    [FieldOffset(1068)]
     public QBoolean GameOver;
-    [FieldOffset(1052)]
+    [FieldOffset(1056)]
     public Int32 PaddleCount;
+    [FieldOffset(1052)]
+    public Int32 BotCount;
     public readonly FixedArray<Input> input {
       get {
         fixed (byte* p = _input_) { return new FixedArray<Input>(p, 72, 6); }
@@ -670,6 +670,7 @@ namespace Quantum {
         hash = hash * 31 + Team2Score.GetHashCode();
         hash = hash * 31 + GameOver.GetHashCode();
         hash = hash * 31 + PaddleCount.GetHashCode();
+        hash = hash * 31 + BotCount.GetHashCode();
         return hash;
       }
     }
@@ -688,6 +689,7 @@ namespace Quantum {
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
         serializer.Stream.Serialize(&p->BallCount);
+        serializer.Stream.Serialize(&p->BotCount);
         serializer.Stream.Serialize(&p->PaddleCount);
         serializer.Stream.Serialize(&p->Team1Score);
         serializer.Stream.Serialize(&p->Team2Score);
@@ -840,6 +842,9 @@ namespace Quantum {
   public unsafe partial interface ISignalTeam2Scored : ISignal {
     void Team2Scored(Frame f);
   }
+  public unsafe partial interface ISignalTrySpawnFirstBall : ISignal {
+    void TrySpawnFirstBall(Frame f);
+  }
   public unsafe partial interface ISignalSpawnNewBall : ISignal {
     void SpawnNewBall(Frame f);
   }
@@ -851,6 +856,7 @@ namespace Quantum {
   public unsafe partial class Frame {
     private ISignalTeam1Scored[] _ISignalTeam1ScoredSystems;
     private ISignalTeam2Scored[] _ISignalTeam2ScoredSystems;
+    private ISignalTrySpawnFirstBall[] _ISignalTrySpawnFirstBallSystems;
     private ISignalSpawnNewBall[] _ISignalSpawnNewBallSystems;
     private ISignalSpawnPaddle[] _ISignalSpawnPaddleSystems;
     partial void AllocGen() {
@@ -866,6 +872,7 @@ namespace Quantum {
       Initialize(this, this.SimulationConfig.Entities, 256);
       _ISignalTeam1ScoredSystems = BuildSignalsArray<ISignalTeam1Scored>();
       _ISignalTeam2ScoredSystems = BuildSignalsArray<ISignalTeam2Scored>();
+      _ISignalTrySpawnFirstBallSystems = BuildSignalsArray<ISignalTrySpawnFirstBall>();
       _ISignalSpawnNewBallSystems = BuildSignalsArray<ISignalSpawnNewBall>();
       _ISignalSpawnPaddleSystems = BuildSignalsArray<ISignalSpawnPaddle>();
       _ComponentSignalsOnAdded = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
@@ -960,6 +967,15 @@ namespace Quantum {
           var s = array[i];
           if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
             s.Team2Scored(_f);
+          }
+        }
+      }
+      public void TrySpawnFirstBall() {
+        var array = _f._ISignalTrySpawnFirstBallSystems;
+        for (Int32 i = 0; i < array.Length; ++i) {
+          var s = array[i];
+          if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
+            s.TrySpawnFirstBall(_f);
           }
         }
       }
