@@ -1,14 +1,11 @@
 using Photon.Deterministic;
-using Photon.Deterministic.Protocol;
-using Quantum.Prototypes;
 using System;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace Quantum.Pong
 {
 
     /// <summary>
-    /// The <c>AsteroidsPlayerSystem</c> class handles the addition of new players to the game,
+    /// The <c>PlayerSystem</c> class handles the addition of new players to the game,
     /// including creating and spawning their ship entities.
     /// </summary>
     public unsafe class PlayerSystem : SystemSignalsOnly, ISignalOnPlayerAdded, ISignalOnPlayerDisconnected
@@ -29,14 +26,13 @@ namespace Quantum.Pong
             AssetRef<EntityPrototype> playerPrototype = data.PlayerAvatar.IsValid ? data.PlayerAvatar : f.RuntimeConfig.DefaultPlayerInfo;
             AssetRef<EntityPrototype> paddlePrototype = f.RuntimeConfig.DefaultPaddle;
             EntityRef playerRef = f.Create(playerPrototype);
-
             {
                 ControlFlags flags;
                 flags.AcceptInputForP1 = true;
                 flags.AcceptInputForP2 = f.RuntimeConfig.LocalPlayerCount <= 1;
 
                 var paddle = SpawnPaddle(f, paddlePrototype);
-                AddPlayer(f, paddle, player, flags);
+                AddPlayerToPaddle(f, paddle, player, flags);
             }
 
             if (f.RuntimeConfig.BotCount > 0)
@@ -44,7 +40,7 @@ namespace Quantum.Pong
                 BotInfo botInfo;
                 botInfo.BotIndex = 0;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
-                AddBot(f, botPaddle, botInfo);
+                AddBotToPaddle(f, botPaddle, botInfo);
             }
 
             if (f.RuntimeConfig.LocalPlayerCount > 1)
@@ -54,7 +50,7 @@ namespace Quantum.Pong
                 flags.AcceptInputForP2 = true;
 
                 var paddle = SpawnPaddle(f, paddlePrototype);
-                AddPlayer(f, paddle, player, flags);
+                AddPlayerToPaddle(f, paddle, player, flags);
             }
 
             if (f.RuntimeConfig.BotCount > 1)
@@ -62,7 +58,7 @@ namespace Quantum.Pong
                 BotInfo botInfo;
                 botInfo.BotIndex = 1;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
-                AddBot(f, botPaddle, botInfo);
+                AddBotToPaddle(f, botPaddle, botInfo);
             }
         }
 
@@ -83,20 +79,18 @@ namespace Quantum.Pong
                 paddle->BaseX = transform->Position.X;
             }
 
-
-
             f.Global->PaddleCount++;
 
             return paddleRef;
         }
 
-        public void AddPlayer(Frame f, EntityRef paddleRef, PlayerRef player, ControlFlags flags)
+        public void AddPlayerToPaddle(Frame f, EntityRef paddleRef, PlayerRef player, ControlFlags flags)
         {
             f.Set(paddleRef, new PlayerLink { PlayerRef = player });
             f.Set(paddleRef, flags);
         }
 
-        public void AddBot(Frame f, EntityRef paddleRef, BotInfo botInfo)
+        public void AddBotToPaddle(Frame f, EntityRef paddleRef, BotInfo botInfo)
         {
             f.Set(paddleRef, botInfo);
         }

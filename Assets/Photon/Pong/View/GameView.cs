@@ -24,6 +24,7 @@ namespace Quantum.Asteroids
         public UnityEngine.UI.Button restartButton;
         public UnityEngine.UI.Button backToMenuButton;
         public UnityEngine.UI.Button leaderboardButton;
+        public UnityEngine.UI.Button smallBackButton;
 
         /// <summary>
         /// The camera to enable when Quantum is in QUANTUM_XY mode.
@@ -50,6 +51,7 @@ namespace Quantum.Asteroids
             restartButton.onClick.AddListener(OnRestartButtonClicked);
             backToMenuButton.onClick.AddListener(OnBackToMenuButtonClicked);
             leaderboardButton.onClick.AddListener(OnLeaderboardButtonClicked);
+            smallBackButton.onClick.AddListener(OnSmallBackButtonClicked);
 
         }
 
@@ -65,53 +67,42 @@ namespace Quantum.Asteroids
             team2ScoreText.text = $"{team2Score}";
 
             bool isGameOver = VerifiedFrame.Global->GameOver;
+            bool isLocalGame = PlayerPrefs.GetInt("IsLocalGame") == 1;
 
-            /// TODO make this nicer and hide restart button for multiplayer
-            restartButton.gameObject.SetActive(isGameOver);
+            smallBackButton.gameObject.SetActive(isLocalGame);
+            restartButton.gameObject.SetActive(isGameOver && isLocalGame);
             backToMenuButton.gameObject.SetActive(isGameOver);
             leaderboardButton.gameObject.SetActive(isGameOver);
 
             gameResultText.enabled = isGameOver;
-
             gameResultText.text = (team1Score > team2Score) ? "Team 1 Won" : "Team 2 Won";
-
-            /*
-            if (ScoreBoard != null)
-            {
-                ScoreBoard.text = "<b>Score</b>\n";
-                var shipsFilter = VerifiedFrame.Filter<PlayerLink, Paddle>();
-                while (shipsFilter.Next(out var entity, out var playerLink, out var shipFields))
-                {
-                    var playerName = VerifiedFrame.GetPlayerData(playerLink.PlayerRef).PlayerNickname;
-                    //ScoreBoard.text += $"{playerName}: {shipFields.Score}  \n";
-                }
-            }
-            */
         }
 
         private void OnRestartButtonClicked()
         {
             QuantumRunner.Default?.Shutdown();
-
-
-            //QuantumRunner.StartGame(new SessionRunner.Arguments {});
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            /*
-            // this doesn't work I also need to reset the game state
-            
-            */
         }
 
         private void OnBackToMenuButtonClicked()
         {
-            QuantumRunner.Default?.Shutdown();
-            SceneManager.LoadScene(0);
+            GoBackToMenu();
         }
 
         private void OnLeaderboardButtonClicked()
         {
             var leaderboard = Instantiate(leaderboardPrefab);
+        }
+
+        private void OnSmallBackButtonClicked()
+        {
+            GoBackToMenu();
+        }
+
+        private void GoBackToMenu()
+        {
+            QuantumRunner.Default?.Shutdown();
+            SceneManager.LoadScene(0);
         }
     }
 }
