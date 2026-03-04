@@ -216,6 +216,10 @@ namespace Quantum.Menu
         /// </summary>
         protected virtual async void OnPlayButtonPressed()
         {
+            PlayerPrefs.SetInt("LocalPlayerCount", 1);
+            PlayerPrefs.SetInt("BotCount", 0);
+            PlayerPrefs.SetInt("IsLocalGame", 0);
+
             ConnectionArgs.Session = null;
             ConnectionArgs.Creating = false;
             ConnectionArgs.Region = ConnectionArgs.PreferredRegion;
@@ -257,6 +261,10 @@ namespace Quantum.Menu
         /// </summary>
         protected virtual void OnPartyButtonPressed()
         {
+            PlayerPrefs.SetInt("LocalPlayerCount", 1);
+            PlayerPrefs.SetInt("BotCount", 0);
+            PlayerPrefs.SetInt("IsLocalGame", 0);
+
             Controller.Show<QuantumMenuUIParty>();
         }
 

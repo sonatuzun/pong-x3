@@ -17,7 +17,7 @@ MonoBehaviour:
     Guid:
       Value: 490772527466783251
   ScoreLimit:
-    RawValue: 65536
+    RawValue: 458752
   PaddleBaseSpeed:
     RawValue: 2621440
   PaddleBaseSize:
