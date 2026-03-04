@@ -53,14 +53,6 @@ namespace Quantum.Menu
         /// The quick play button.
         /// </summary>
         [InlineHelp, SerializeField] protected UnityEngine.UI.Button _playButton;
-        /// <summary>
-        /// The open single player button.
-        /// </summary>
-        [InlineHelp, SerializeField] protected UnityEngine.UI.Button _singlePlayer;
-        /// <summary>
-        /// The local multiplayer button.
-        /// </summary>
-        [InlineHelp, SerializeField] protected UnityEngine.UI.Button _localMultiplayer;
 
         /// <summary>
         /// The quit button.
@@ -235,11 +227,18 @@ namespace Quantum.Menu
             await Controller.HandleConnectionResult(result, this.Controller);
         }
 
-        // copy some logic from other buttons
-        protected virtual void OnLocalMultiplayerButtonPressed()
+        protected virtual void OnLocalVersusButtonPressed()
         {
             PlayerPrefs.SetInt("LocalPlayerCount", 2);
             PlayerPrefs.SetInt("BotCount", 0);
+            PlayerPrefs.SetInt("IsLocalGame", 1);
+            SceneManager.LoadScene(1);
+        }
+
+        protected virtual void OnLocalCoopButtonPressed()
+        {
+            PlayerPrefs.SetInt("LocalPlayerCount", 2);
+            PlayerPrefs.SetInt("BotCount", 2);
             PlayerPrefs.SetInt("IsLocalGame", 1);
             SceneManager.LoadScene(1);
         }
