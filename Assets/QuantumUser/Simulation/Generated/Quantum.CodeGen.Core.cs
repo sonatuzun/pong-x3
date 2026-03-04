@@ -579,6 +579,32 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct PaddleInput {
+    public const Int32 SIZE = 12;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(8)]
+    public QBoolean Up;
+    [FieldOffset(4)]
+    public QBoolean Down;
+    [FieldOffset(0)]
+    public QBoolean Charge;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 12421;
+        hash = hash * 31 + Up.GetHashCode();
+        hash = hash * 31 + Down.GetHashCode();
+        hash = hash * 31 + Charge.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (PaddleInput*)ptr;
+        QBoolean.Serialize(&p->Charge, serializer);
+        QBoolean.Serialize(&p->Down, serializer);
+        QBoolean.Serialize(&p->Up, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
     public const Int32 SIZE = 1072;
     public const Int32 ALIGNMENT = 8;
@@ -687,20 +713,20 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
-  public unsafe partial struct Bot : Quantum.IComponent {
+  public unsafe partial struct BotInfo : Quantum.IComponent {
     public const Int32 SIZE = 4;
     public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
     public Int32 BotIndex;
     public override readonly Int32 GetHashCode() {
       unchecked { 
-        var hash = 419;
+        var hash = 13151;
         hash = hash * 31 + BotIndex.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
-        var p = (Bot*)ptr;
+        var p = (BotInfo*)ptr;
         serializer.Stream.Serialize(&p->BotIndex);
     }
   }
@@ -746,17 +772,22 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Paddle : Quantum.IComponent {
-    public const Int32 SIZE = 16;
+    public const Int32 SIZE = 32;
     public const Int32 ALIGNMENT = 8;
+    [FieldOffset(28)]
+    private fixed Byte _alignment_padding_[4];
     [FieldOffset(8)]
     public FP BaseX;
     [FieldOffset(0)]
     public Int32 BallHitCount;
+    [FieldOffset(16)]
+    public PaddleInput Input;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 10093;
         hash = hash * 31 + BaseX.GetHashCode();
         hash = hash * 31 + BallHitCount.GetHashCode();
+        hash = hash * 31 + Input.GetHashCode();
         return hash;
       }
     }
@@ -764,6 +795,7 @@ namespace Quantum {
         var p = (Paddle*)ptr;
         serializer.Stream.Serialize(&p->BallHitCount);
         FP.Serialize(&p->BaseX, serializer);
+        Quantum.PaddleInput.Serialize(&p->Input, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -840,8 +872,8 @@ namespace Quantum {
       _ComponentSignalsOnRemoved = new ComponentReactiveCallbackInvoker[ComponentTypeId.Type.Length];
       BuildSignalsArrayOnComponentAdded<Quantum.Ball>();
       BuildSignalsArrayOnComponentRemoved<Quantum.Ball>();
-      BuildSignalsArrayOnComponentAdded<Quantum.Bot>();
-      BuildSignalsArrayOnComponentRemoved<Quantum.Bot>();
+      BuildSignalsArrayOnComponentAdded<Quantum.BotInfo>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.BotInfo>();
       BuildSignalsArrayOnComponentAdded<CharacterController2D>();
       BuildSignalsArrayOnComponentRemoved<CharacterController2D>();
       BuildSignalsArrayOnComponentAdded<CharacterController3D>();
@@ -967,7 +999,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum.BitSet4096), Quantum.BitSet4096.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet512), Quantum.BitSet512.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet6), Quantum.BitSet6.SIZE);
-      typeRegistry.Register(typeof(Quantum.Bot), Quantum.Bot.SIZE);
+      typeRegistry.Register(typeof(Quantum.BotInfo), Quantum.BotInfo.SIZE);
       typeRegistry.Register(typeof(Button), Button.SIZE);
       typeRegistry.Register(typeof(CallbackFlags), 4);
       typeRegistry.Register(typeof(CharacterController2D), CharacterController2D.SIZE);
@@ -1018,6 +1050,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(NullableFPVector3), NullableFPVector3.SIZE);
       typeRegistry.Register(typeof(NullableNonNegativeFP), NullableNonNegativeFP.SIZE);
       typeRegistry.Register(typeof(Quantum.Paddle), Quantum.Paddle.SIZE);
+      typeRegistry.Register(typeof(Quantum.PaddleInput), Quantum.PaddleInput.SIZE);
       typeRegistry.Register(typeof(PhysicsBody2D), PhysicsBody2D.SIZE);
       typeRegistry.Register(typeof(PhysicsBody3D), PhysicsBody3D.SIZE);
       typeRegistry.Register(typeof(PhysicsCallbacks2D), PhysicsCallbacks2D.SIZE);
@@ -1051,7 +1084,7 @@ namespace Quantum {
       ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 7)
         .AddBuiltInComponents()
         .Add<Quantum.Ball>(Quantum.Ball.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.Bot>(Quantum.Bot.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.BotInfo>(Quantum.BotInfo.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.ControlFlags>(Quantum.ControlFlags.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.GoalLine>(Quantum.GoalLine.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Paddle>(Quantum.Paddle.Serialize, null, null, ComponentFlags.None)

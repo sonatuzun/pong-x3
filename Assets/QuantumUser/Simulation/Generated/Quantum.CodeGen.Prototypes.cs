@@ -65,16 +65,16 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
-  [Quantum.Prototypes.Prototype(typeof(Quantum.Bot))]
-  public unsafe partial class BotPrototype : ComponentPrototype<Quantum.Bot> {
+  [Quantum.Prototypes.Prototype(typeof(Quantum.BotInfo))]
+  public unsafe partial class BotInfoPrototype : ComponentPrototype<Quantum.BotInfo> {
     public Int32 BotIndex;
-    partial void MaterializeUser(Frame frame, ref Quantum.Bot result, in PrototypeMaterializationContext context);
+    partial void MaterializeUser(Frame frame, ref Quantum.BotInfo result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
-        Quantum.Bot component = default;
+        Quantum.BotInfo component = default;
         Materialize((Frame)f, ref component, in context);
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
-    public void Materialize(Frame frame, ref Quantum.Bot result, in PrototypeMaterializationContext context = default) {
+    public void Materialize(Frame frame, ref Quantum.BotInfo result, in PrototypeMaterializationContext context = default) {
         result.BotIndex = this.BotIndex;
         MaterializeUser(frame, ref result, in context);
     }
@@ -136,6 +136,7 @@ namespace Quantum.Prototypes {
   public unsafe partial class PaddlePrototype : ComponentPrototype<Quantum.Paddle> {
     public FP BaseX;
     public Int32 BallHitCount;
+    public Quantum.Prototypes.PaddleInputPrototype Input;
     partial void MaterializeUser(Frame frame, ref Quantum.Paddle result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.Paddle component = default;
@@ -145,6 +146,21 @@ namespace Quantum.Prototypes {
     public void Materialize(Frame frame, ref Quantum.Paddle result, in PrototypeMaterializationContext context = default) {
         result.BaseX = this.BaseX;
         result.BallHitCount = this.BallHitCount;
+        this.Input.Materialize(frame, ref result.Input, in context);
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.PaddleInput))]
+  public unsafe partial class PaddleInputPrototype : StructPrototype {
+    public QBoolean Up;
+    public QBoolean Down;
+    public QBoolean Charge;
+    partial void MaterializeUser(Frame frame, ref Quantum.PaddleInput result, in PrototypeMaterializationContext context);
+    public void Materialize(Frame frame, ref Quantum.PaddleInput result, in PrototypeMaterializationContext context = default) {
+        result.Up = this.Up;
+        result.Down = this.Down;
+        result.Charge = this.Charge;
         MaterializeUser(frame, ref result, in context);
     }
   }

@@ -1,7 +1,6 @@
 namespace Quantum.Pong
 {
     using Photon.Deterministic;
-    using System.Buffers.Text;
 
     public unsafe class PaddleSystem : SystemMainThreadFilter<PaddleSystem.Filter>, ISignalSpawnPaddle
     {
@@ -23,23 +22,19 @@ namespace Quantum.Pong
                 return;
             }
 
-            PongUtils.PaddleInput input = new PongUtils.PaddleInput();
             ControlFlags* flags = filter.ControlFlags;
 
-            if (f.Unsafe.TryGetPointer<Bot>(filter.Entity, out var botInfo))
-            {
-                input = PongUtils.CreateBotInput(f, filter.Entity);
-            }
-            else if (f.Unsafe.TryGetPointer<PlayerLink>(filter.Entity, out var playerLink))
+
+            if (f.Unsafe.TryGetPointer<PlayerLink>(filter.Entity, out var playerLink))
             {
                 Input* rawInput = f.GetPlayerInput(playerLink->PlayerRef);
-                input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
+                filter.Paddle->Input = PongUtils.ProcessInput(rawInput, flags->AcceptInputForP1, flags->AcceptInputForP2);
             }
 
-            UpdatePaddleMovement(f, ref filter, input, config);
+            UpdatePaddleMovement(f, ref filter, config);
 
             FP baseX = filter.Paddle->BaseX;
-            FP targetX = input.Charge ? baseX + config.PaddleChargeDistance * FPMath.Sign(baseX) : baseX;
+            FP targetX = filter.Paddle->Input.Charge ? baseX + config.PaddleChargeDistance * FPMath.Sign(baseX) : baseX;
 
             StabilizePaddle(f, ref filter, targetX, config);
         }
@@ -49,21 +44,22 @@ namespace Quantum.Pong
         /// Move the paddle.
         /// Limit it's movement in top and bottom.
         /// </summary>
-        private void UpdatePaddleMovement(Frame f, ref Filter filter, PongUtils.PaddleInput input, PongGameConfig config)
+        private void UpdatePaddleMovement(Frame f, ref Filter filter, PongGameConfig config)
         {
             FP paddleExtent = config.PaddleBaseSize * FP._0_50;
             FP paddleSpeed = config.PaddleBaseSpeed;
             FP mapExtentY = config.GameMapSize.Y * FP._0_50;
             FP movementLimit = mapExtentY - paddleExtent;
 
+            Paddle* paddle = filter.Paddle;
             PhysicsBody2D* body = filter.PhysicsBody;
             Transform2D* transform = filter.Transform;
 
-            if (input.Up && transform->Position.Y < movementLimit)
+            if (paddle->Input.Up && transform->Position.Y < movementLimit)
             {
                 body->Velocity = FPVector2.Up * paddleSpeed;
             }
-            else if (input.Down && transform->Position.Y > -movementLimit)
+            else if (paddle->Input.Down && transform->Position.Y > -movementLimit)
             {
                 body->Velocity = FPVector2.Down * paddleSpeed;
             }
@@ -80,7 +76,6 @@ namespace Quantum.Pong
             FP diff = targetX - filter.Transform->Position.X;
             filter.PhysicsBody->AddLinearImpulse(new FPVector2(config.PaddleChargeForce * diff, 0));
         }
-
 
         public void SpawnPaddle(Frame f, EntityRef paddle)
         {

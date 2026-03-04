@@ -78,6 +78,7 @@
     <Compile Include="Assets\Photon\Pong\Simulation\BallSpawner.cs" />
     <Compile Include="Assets\Photon\Pong\Simulation\BallSystem.cs" />
     <Compile Include="Assets\Photon\Pong\Simulation\Configs\RuntimeConfig.Pong.cs" />
+    <Compile Include="Assets\Photon\Pong\Simulation\BotSystem.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\SystemSetup.User.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\RuntimeConfig.User.cs" />
     <Compile Include="Assets\QuantumUser\Simulation\Generated\Quantum.CodeGen.Prototypes.cs" />

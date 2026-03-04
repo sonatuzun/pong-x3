@@ -31,13 +31,21 @@ component PlayerLink
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
+struct PaddleInput
+{
+    bool Up;
+    bool Down;
+    bool Charge;
+}
+
+[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
 component Paddle
 {
     FP BaseX;
     Int32 BallHitCount;
+    PaddleInput Input;
 }
 
-[CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
 component ControlFlags
 {
     bool AcceptInputForP1;
@@ -51,7 +59,7 @@ component Ball
 }
 
 [CodeGen(UnityWrapperFolder, "Assets/Photon/Pong/View/Generated")]
-component Bot
+component BotInfo
 {
     Int32 BotIndex;
 }

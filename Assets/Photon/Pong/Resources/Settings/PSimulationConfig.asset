@@ -81,7 +81,7 @@ MonoBehaviour:
     DefaultJointsCapacity: 128
     DefaultPhysicsMaterial:
       Id:
-        Value: 512274728444373301
+        Value: 454435896808641090
     DefaultCharacterController2D:
       Id:
         Value: 0

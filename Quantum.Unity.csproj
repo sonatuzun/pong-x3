@@ -112,6 +112,7 @@
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumStaticTerrainCollider3D.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QPrototypePhysicsJoints2D.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumTaskRunnerJobs.cs" />
+    <Compile Include="Assets\QuantumUser\View\Generated\QPrototypeControlFlags.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumStaticPolygonCollider2D.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QuantumGraphProfilerRenderTime.cs" />
     <Compile Include="Assets\Photon\Quantum\Runtime\QPrototypeNavMeshAvoidanceAgent.cs" />

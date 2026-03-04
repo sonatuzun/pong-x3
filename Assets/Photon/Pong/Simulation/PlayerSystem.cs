@@ -41,7 +41,7 @@ namespace Quantum.Pong
 
             if (f.RuntimeConfig.BotCount > 0)
             {
-                Bot botInfo;
+                BotInfo botInfo;
                 botInfo.BotIndex = 0;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBot(f, botPaddle, botInfo);
@@ -59,7 +59,7 @@ namespace Quantum.Pong
 
             if (f.RuntimeConfig.BotCount > 1)
             {
-                Bot botInfo;
+                BotInfo botInfo;
                 botInfo.BotIndex = 1;
                 var botPaddle = SpawnPaddle(f, paddlePrototype);
                 AddBot(f, botPaddle, botInfo);
@@ -96,7 +96,7 @@ namespace Quantum.Pong
             f.Set(paddleRef, flags);
         }
 
-        public void AddBot(Frame f, EntityRef paddleRef, Bot botInfo)
+        public void AddBot(Frame f, EntityRef paddleRef, BotInfo botInfo)
         {
             f.Set(paddleRef, botInfo);
         }

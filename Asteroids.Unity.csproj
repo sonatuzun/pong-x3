@@ -68,8 +68,8 @@
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypePlayerLink.cs" />
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypePaddle.cs" />
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypeControlFlags.cs" />
-    <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypeBot.cs" />
     <Compile Include="Assets\Photon\Pong\View\GameView.cs" />
+    <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypeBotInfo.cs" />
     <Compile Include="Assets\Photon\Pong\View\Generated\QPrototypeBall.cs" />
   </ItemGroup>
   <ItemGroup>
