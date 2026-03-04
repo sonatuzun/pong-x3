@@ -17,13 +17,13 @@ MonoBehaviour:
     Guid:
       Value: 490772527466783251
   ScoreLimit:
-    RawValue: 458752
+    RawValue: 65536
   PaddleBaseSpeed:
     RawValue: 2621440
   PaddleBaseSize:
     RawValue: 655360
   PaddleDistanceToCenter:
-    RawValue: 1966080
+    RawValue: 1638400
   PaddleChargeDistance:
     RawValue: 524288
   PaddleChargeForce:
